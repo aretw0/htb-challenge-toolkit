@@ -42,6 +42,21 @@ Este documento registra a evolução do projeto HTB-Challenge-Toolkit e a colabo
     - **`bin/create_challenge.sh`:** Ajustado para usar a nova terminologia e placeholders do template.
     - **`README.md` e `GEMINI.md`:** Atualizados para clarificar a distinção entre "desafio" (Path/série de máquinas) e "máquina individual", e para fornecer exemplos de uso mais abrangentes para `create_challenge.sh`.
 
-## 5. Próximos Passos
+## 5. Gerenciamento de Arquivos e Configuração de VPN
+
+- **Ignorando `challenges/` no Git:**
+    - **Problema:** O diretório `challenges/` continha arquivos específicos de desafios que não deveriam ser versionados para manter o repositório genérico.
+    - **Solução Implementada:** Atualização do `.gitignore` para ignorar todo o conteúdo de `challenges/` exceto o arquivo `.gitkeep`, garantindo que a estrutura do diretório seja mantida no repositório.
+- **Configuração de VPN Simplificada e Flexível:**
+    - **Problema:** A configuração da VPN exigia a definição manual de variáveis de ambiente, o que não era ideal para diferentes ambientes de desenvolvimento (terminal vs. VS Code Dev Containers).
+    - **Solução Implementada:**
+        - Refatoração do script `docker/start_vpn.sh` para implementar uma cadeia de prioridade na busca por arquivos `.ovpn`:
+            1.  `OVPN_CONFIG_FILE`: Caminho explícito definido pelo usuário (maior prioridade).
+            2.  `CHALLENGE_NAME`: Nome do desafio, que leva à busca por `challenges/<CHALLENGE_NAME>/<CHALLENGE_NAME>.ovpn`.
+            3.  `global.ovpn`: Arquivo VPN global na raiz do projeto (fallback).
+        - Remoção da configuração explícita de `OVPN_CONFIG_FILE` de `.devcontainer/devcontainer.json`, confiando na leitura automática de `.env` pelo Dev Container.
+        - Atualização de `README.md`, `GEMINI.md` e `.env.example` para documentar claramente a nova cadeia de prioridade e as formas de definir `OVPN_CONFIG_FILE` e `CHALLENGE_NAME` (via `.env` ou linha de comando).
+
+## 6. Próximos Passos
 
 - Iniciar a fase de Reconhecimento e Enumeração para o desafio "Cap".
