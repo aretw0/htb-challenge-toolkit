@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Create New HTB Challenge",
+      "type": "shell",
+      "command": "./bin/create_challenge.sh ${input:challengeName}",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "args": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "windows": {
+        "command": ".\\bin\\create_challenge.sh ${input:challengeName}"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "challengeName",
+      "type": "promptString",
+      "description": "Enter the name of the new HTB challenge (e.g., 'cap', 'optimus'):",
+      "default": "new_challenge"
+    }
+  ]
+}
