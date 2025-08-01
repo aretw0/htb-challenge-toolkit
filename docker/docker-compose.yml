@@ -6,7 +6,6 @@ services:
       context: ..
       dockerfile: ./docker/Dockerfile
     volumes:
-      - ./vpn:/vpn:ro
       - .:/workspace:cached # Monta o diretório do projeto dentro do contêiner
     cap_add:
       - NET_ADMIN

@@ -45,3 +45,6 @@ sed -i "/^\[DIFICULDADE_DA_MAQUINA_2\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
 sed -i "/^\[SINOPSE_DA_MAQUINA_2\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
 
 echo "Estrutura do desafio '${CHALLENGE_NAME}' criada em '${CHALLENGE_DIR}'."
+
+# Cria um placeholder para o arquivo .ovpn específico do desafio
+touch "${CHALLENGE_DIR}/${CHALLENGE_NAME}.ovpn"

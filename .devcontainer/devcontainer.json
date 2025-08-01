@@ -8,10 +8,11 @@
 		"--device=/dev/net/tun",
 		"--security-opt",
 		"label:disable",
-		"--privileged",
-		"-v",
-		"${localWorkspaceFolder}/vpn:/vpn:ro"
+		"--privileged"
 	],
+	"containerEnv": {
+		"OVPN_CONFIG_FILE": "${localEnv:OVPN_CONFIG_FILE}" # Carrega OVPN_CONFIG_FILE do .env do host
+	},
 	"customizations": {
 		"vscode": {
 			"settings": {},

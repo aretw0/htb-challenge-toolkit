@@ -1,5 +1,6 @@
 # Ignora arquivos de configuração da VPN
-/vpn/*.ovpn
+challenges/**/*.ovpn
+global.ovpn
 
 # Ignora arquivos de ambiente
 .env

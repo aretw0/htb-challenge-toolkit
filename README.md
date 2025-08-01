@@ -8,11 +8,11 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
 
 ## Funcionalidades Principais
 
-*   **Ambiente de Desenvolvimento Isolado:** Utilize Dev Containers (para usuários VS Code) ou Docker Compose (para usuários de terminal) para um ambiente de pentest pré-configurado com ferramentas essenciais como `nmap` e `openvpn`.
-*   **Conexão VPN Automatizada:** Configure sua conexão VPN do HTB para iniciar automaticamente ao subir o ambiente, com validação e feedback claros.
-*   **Scripts Utilitários:** Ferramentas automatizadas para tarefas comuns de reconhecimento e enumeração, com resultados de scans salvos automaticamente na pasta `scans/` de cada desafio.
-*   **Documentação Estruturada:** Um modelo de `WRITEUP.md` para cada **desafio**, permitindo que você registre seu processo de resolução, desde o reconhecimento até a escalada de privilégios.
-*   **Histórico de Commits Significativo:** Adotamos uma abordagem de commits atômicos para que o histórico do Git reflita o progresso e as decisões tomadas.
+- **Ambiente de Desenvolvimento Isolado:** Utilize Dev Containers (para usuários VS Code) ou Docker Compose (para usuários de terminal) para um ambiente de pentest pré-configurado com ferramentas essenciais como `nmap` e `openvpn`.
+- **Conexão VPN Automatizada:** Configure sua conexão VPN do HTB para iniciar automaticamente ao subir o ambiente, com validação e feedback claros.
+- **Scripts Utilitários:** Ferramentas automatizadas para tarefas comuns de reconhecimento e enumeração, com resultados de scans salvos automaticamente na pasta `scans/` de cada desafio.
+- **Documentação Estruturada:** Um modelo de `WRITEUP.md` para cada **desafio**, permitindo que você registre seu processo de resolução, desde o reconhecimento até a escalada de privilégios.
+- **Histórico de Commits Significativo:** Adotamos uma abordagem de commits atômicos para que o histórico do Git reflita o progresso e as decisões tomadas.
 
 ## Como Começar
 
@@ -22,12 +22,12 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     cd <nome_do_repositorio>
     ```
 2.  **Configure sua VPN:**
-    *   Crie uma pasta `vpn/` na raiz do projeto.
-    *   Coloque seu arquivo `.ovpn` do Hack The Box dentro desta pasta (ex: `vpn/meu_arquivo.ovpn`).
-    *   Se você tiver múltiplos arquivos `.ovpn` ou quiser especificar qual usar, crie um arquivo `.env` na raiz do projeto (copiando de `.env.example`) e defina `OVPN_CONFIG_FILE=nome_do_seu_arquivo.ovpn`.
+    - **Para um desafio específico:** Coloque o arquivo `.ovpn` dentro da pasta do desafio (ex: `challenges/cap/cap.ovpn`).
+    - **Para uma VPN global (fallback):** Coloque um arquivo `global.ovpn` na raiz do repositório.
+    - **Para especificar:** Se você tiver múltiplos arquivos `.ovpn` ou quiser especificar qual usar, crie um arquivo `.env` na raiz do projeto (copiando de `.env.example`) e defina `OVPN_CONFIG_FILE=caminho/para/seu/arquivo.ovpn` (caminho relativo à raiz do repositório, ex: `OVPN_CONFIG_FILE=challenges/cap/cap.ovpn`).
 3.  **Inicie o Ambiente de Desenvolvimento:**
-    *   **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme.
-    *   **Para usuários de Terminal (Docker Compose):** Navegue até a pasta `docker/` e execute `docker-compose up -d`. Para entrar no shell do contêiner, use `docker-compose exec pentest-env bash`.
+    - **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme.
+    - **Para usuários de Terminal (Docker Compose):** Navegue até a pasta `docker/` e execute `docker-compose up -d`. Para entrar no shell do contêiner, use `docker-compose exec pentest-env bash`.
 4.  **Crie um Novo Desafio:**
     Use o script `bin/create_challenge.sh` para gerar a estrutura de pastas para um novo desafio:
     ```bash
@@ -44,15 +44,14 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
 
 ## Estrutura do Projeto
 
-*   `.devcontainer/`: Configurações para o Dev Container do VS Code.
-*   `bin/`: Contém scripts para gerenciar o repositório (ex: `create_challenge.sh`).
-*   `docker/`: Contém o `Dockerfile` e o `docker-compose.yml` para o ambiente Docker.
-*   `vpn/`: Pasta para seus arquivos de configuração `.ovpn` (ignorada pelo Git).
-*   `challenges/`: Contém as pastas para cada desafio HTB, cada uma com seu `WRITEUP.md` e artefatos específicos. Cada pasta de desafio também contém uma subpasta `scans/` para os resultados dos scans.
-*   `templates/`: Contém templates para novos desafios (ex: `WRITEUP_TEMPLATE.md`).
-*   `tools/`: Contém scripts utilitários de pentest (ex: `nmap_scan.sh`).
-*   `GEMINI.md`: Diretrizes de colaboração para o Gemini (este assistente).
-*   `README.md`: Este arquivo.
+- `.devcontainer/`: Configurações para o Dev Container do VS Code.
+- `bin/`: Contém scripts para gerenciar o repositório (ex: `create_challenge.sh`).
+- `docker/`: Contém o `Dockerfile` e o `docker-compose.yml` para o ambiente Docker.
+- `challenges/`: Contém as pastas para cada desafio HTB, cada uma com seu `WRITEUP.md` e artefatos específicos. Cada pasta de desafio também contém uma subpasta `scans/` para os resultados dos scans.
+- `templates/`: Contém templates para novos desafios (ex: `WRITEUP_TEMPLATE.md`).
+- `tools/`: Contém scripts utilitários de pentest (ex: `nmap_scan.sh`).
+- `GEMINI.md`: Diretrizes de colaboração para o Gemini (este assistente).
+- `README.md`: Este arquivo.
 
 ## Contribuição
 
