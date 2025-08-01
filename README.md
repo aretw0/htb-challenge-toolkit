@@ -23,11 +23,11 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     ```
 2.  **Configure sua VPN:**
     O ambiente tentará automaticamente encontrar e usar seu arquivo `.ovpn` na seguinte ordem de prioridade:
-    -   **Para um desafio específico:** Se a variável de ambiente `CHALLENGE_NAME` estiver definida (ex: `CHALLENGE_NAME=cap`), o ambiente procurará por `challenges/<CHALLENGE_NAME>/<CHALLENGE_NAME>.ovpn`. Certifique-se de que o arquivo `.ovpn` tenha o mesmo nome da pasta do desafio.
-        -   **Como definir `CHALLENGE_NAME`:**
-            -   **Para usuários de Terminal (Docker Compose):** Você pode definir a variável diretamente na linha de comando (ex: `CHALLENGE_NAME=cap docker-compose up -d`) ou, para persistência, criar um arquivo `.env` na raiz do projeto (copiando de `.env.example`) e adicionar `CHALLENGE_NAME=seu_desafio`.
-            -   **Para usuários VS Code (Dev Containers):** Crie um arquivo `.env` na raiz do projeto (copiando de `.env.example`) e adicione `CHALLENGE_NAME=seu_desafio`. O Dev Container lerá automaticamente esta variável.
-    -   **Para uma VPN global (fallback):** Se `CHALLENGE_NAME` não estiver definido ou o arquivo `.ovpn` do desafio não for encontrado, o ambiente procurará por `global.ovpn` na raiz do repositório.
+    -   **Prioridade 1: `OVPN_CONFIG_FILE` (Caminho Explícito):** Se a variável de ambiente `OVPN_CONFIG_FILE` estiver definida (ex: `OVPN_CONFIG_FILE=challenges/cap/cap.ovpn`), o ambiente tentará usar o arquivo `.ovpn` especificado por este caminho (relativo à raiz do projeto).
+        -   **Como definir `OVPN_CONFIG_FILE`:** Crie um arquivo `.env` na raiz do projeto (copiando de `.env.example`) e adicione `OVPN_CONFIG_FILE=caminho/para/seu/arquivo.ovpn`.
+    -   **Prioridade 2: `CHALLENGE_NAME` (Desafio Específico):** Se `OVPN_CONFIG_FILE` não estiver definido ou o arquivo especificado não for encontrado, e a variável de ambiente `CHALLENGE_NAME` estiver definida (ex: `CHALLENGE_NAME=cap`), o ambiente procurará por `challenges/<CHALLENGE_NAME>/<CHALLENGE_NAME>.ovpn`. Certifique-se de que o arquivo `.ovpn` tenha o mesmo nome da pasta do desafio.
+        -   **Como definir `CHALLENGE_NAME`:** Você pode definir a variável diretamente na linha de comando (ex: `CHALLENGE_NAME=cap docker-compose up -d`) ou, para persistência, criar um arquivo `.env` na raiz do projeto (copiando de `.env.example`) e adicionar `CHALLENGE_NAME=seu_desafio`.
+    -   **Prioridade 3: `global.ovpn` (Fallback Global):** Se nenhuma das opções acima resultar em um arquivo `.ovpn` válido, o ambiente procurará por `global.ovpn` na raiz do repositório.
     -   **Erro:** Se nenhum dos arquivos `.ovpn` for encontrado nos locais esperados, a conexão VPN não será iniciada e o contêiner pode falhar ao iniciar ou exibir um erro.
 3.  **Inicie o Ambiente de Desenvolvimento:**
     - **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme.
