@@ -94,6 +94,18 @@ Este documento registra a evolução do projeto HTB-Challenge-Toolkit e a colabo
     - **Problema:** A documentação anterior sugeria a execução do `docker-compose` de subdiretórios.
     - **Solução Implementada:** A documentação agora enfatiza que o `docker-compose` deve ser sempre executado a partir da raiz do projeto.
 
+- **Adição de Makefile para Simplificação de Comandos:**
+    - **Problema:** A execução de comandos Docker Compose e scripts utilitários exigia comandos longos e repetitivos, especialmente para usuários de terminal.
+    - **Solução Implementada:** Criação de um `Makefile` na raiz do projeto com targets para:
+        - `make up`: Iniciar o ambiente Docker Compose.
+        - `make down`: Parar o ambiente Docker Compose.
+        - `make clean`: Parar e remover todos os recursos do Docker Compose.
+        - `make shell`: Acessar o shell do contêiner.
+        - `make vpn-global`: Conectar à VPN usando `global.ovpn`.
+        - `make vpn-challenge CHALLENGE=<nome_do_desafio>`: Conectar à VPN de um desafio específico.
+        - `make nmap-scan IP=<ip_alvo> [OUTPUT_DIR=<diretorio_saida>]`: Executar um scan Nmap.
+    - **Impacto:** Simplifica significativamente a experiência do desenvolvedor, tornando os comandos mais curtos e fáceis de lembrar.
+
 ## 7. Próximos Passos
 
 - Iniciar a fase de Reconhecimento e Enumeração para o desafio "Cap".

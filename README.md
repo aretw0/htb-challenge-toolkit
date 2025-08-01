@@ -22,39 +22,40 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     cd <nome_do_repositorio>
     ```
 2.  **Conecte-se à VPN (Manual):**
-    Após iniciar o ambiente, você precisará iniciar a conexão VPN manualmente dentro do contêiner. O script `connect_vpn.sh` está disponível para isso.
+    Após iniciar o ambiente, você precisará iniciar a conexão VPN manualmente dentro do contêiner. Use os comandos `make vpn-global` ou `make vpn-challenge`.
     -   **Conectar com `global.ovpn` (padrão):**
         ```bash
-        docker exec -it docker_pentest-env_1 /workspace/tools/connect_vpn.sh
+        make vpn-global
         ```
-    -   **Conectar com um arquivo `.ovpn` específico:**
+    -   **Conectar com um arquivo `.ovpn` específico de desafio:**
         ```bash
-        docker exec -it docker_pentest-env_1 /workspace/tools/connect_vpn.sh challenges/seu_desafio/seu_desafio.ovpn
+        make vpn-challenge CHALLENGE=seu_desafio
         ```
-        Substitua `seu_desafio/seu_desafio.ovpn` pelo caminho real do seu arquivo `.ovpn` relativo à raiz do projeto.
+        Substitua `seu_desafio` pelo nome do seu desafio (ex: `cap`). Certifique-se de que o arquivo `.ovpn` esteja em `challenges/seu_desafio/seu_desafio.ovpn`.
     -   **Verificar a conexão:** Após executar o comando, você pode verificar os logs do contêiner para confirmar a conexão:
         ```bash
         docker-compose -f docker/docker-compose.yml logs pentest-env
         ```
 3.  **Inicie o Ambiente de Desenvolvimento:**
     - **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme.
-    - **Para usuários de Terminal (Docker Compose):**
-        - **Iniciar o ambiente:** Na raiz do projeto, execute:
+    - **Para usuários de Terminal (Docker Compose via Makefile):**
+        O `Makefile` na raiz do projeto simplifica a interação com o ambiente Docker Compose.
+        - **Iniciar o ambiente:**
             ```bash
-            docker-compose -f docker/docker-compose.yml up -d
+            make up
             ```
             Isso construirá (se necessário) e iniciará o contêiner em segundo plano.
         - **Acessar o shell do contêiner:**
             ```bash
-            docker exec -it docker_pentest-env_1 bash
+            make shell
             ```
-        - **Parar o ambiente:** Para parar os serviços sem remover os contêineres:
+        - **Parar o ambiente:**
             ```bash
-            docker-compose -f docker/docker-compose.yml stop
+            make down
             ```
-        - **Parar e remover o ambiente (limpeza completa):** Para parar os serviços, remover os contêineres, redes e volumes anônimos (útil para um "recomeço limpo" ou após depuração):
+        - **Parar e remover o ambiente (limpeza completa):**
             ```bash
-            docker-compose -f docker/docker-compose.yml down --volumes --remove-orphans
+            make clean
             ```
 4.  **Crie um Novo Desafio:**
     Use o script `bin/create_challenge.sh` para gerar a estrutura de pastas para um novo desafio:
@@ -64,16 +65,15 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     Exemplo: `./bin/create_challenge.sh path_of_glory` (para um Path) ou `./bin/create_challenge.sh cap` (para uma máquina individual).
     Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`.
 5.  **Execute Scans:**
-    Após conectar a VPN, você pode executar scans Nmap. O script `nmap_scan.sh` salvará os resultados na pasta `scans/` na raiz do projeto por padrão, ou em uma pasta específica se você usar a opção `-o`.
-    ```bash
-    docker exec -it docker_pentest-env_1 /workspace/tools/nmap_scan.sh <IP_ADDRESS>
-    ```
-    Exemplo: `docker exec -it docker_pentest-env_1 /workspace/tools/nmap_scan.sh 10.10.10.245`
-    
-    Para salvar os resultados em uma pasta de desafio específica (ex: `challenges/cap/scans/`):
-    ```bash
-    docker exec -it docker_pentest-env_1 /workspace/tools/nmap_scan.sh -o challenges/cap/scans <IP_ADDRESS>
-    ```
+    Após conectar a VPN, você pode executar scans Nmap usando o `Makefile`.
+    -   **Scan básico:**
+        ```bash
+        make nmap-scan IP=10.10.10.245
+        ```
+    -   **Scan com diretório de saída específico:**
+        ```bash
+        make nmap-scan IP=10.10.10.245 OUTPUT_DIR=challenges/cap/scans
+        ```
 
 ## Estrutura do Projeto
 

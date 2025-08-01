@@ -32,18 +32,39 @@ O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN n
 ## Fluxo de Trabalho Comum
 
 *   **Criação de Desafio:** `bin/create_challenge.sh <nome_do_desafio>` (Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`. O nome do desafio pode ser o nome de uma máquina individual ou de um Path/Desafio com múltiplas máquinas.)
-*   **Início do Ambiente:** O `docker-compose` deve ser sempre executado a partir da raiz do projeto.
+*   **Início do Ambiente:**
     ```bash
-    docker-compose -f docker/docker-compose.yml up -d
+    make up
     ```
-*   **Conexão VPN:** Após o ambiente estar em execução, conecte a VPN manualmente.
+*   **Conexão VPN:**
+    -   **Global:**
+        ```bash
+        make vpn-global
+        ```
+    -   **Desafio Específico:**
+        ```bash
+        make vpn-challenge CHALLENGE=<nome_do_desafio>
+        ```
+*   **Execução de Scans:**
+    -   **Básico:**
+        ```bash
+        make nmap-scan IP=<IP_ADDRESS>
+        ```
+    -   **Com Diretório de Saída:**
+        ```bash
+        make nmap-scan IP=<IP_ADDRESS> OUTPUT_DIR=challenges/<nome_do_desafio>/scans
+        ```
+*   **Acessar Shell do Contêiner:**
     ```bash
-    docker exec -it docker_pentest-env_1 /workspace/tools/connect_vpn.sh [caminho/do/ovpn]
+    make shell
     ```
-    (Ex: `/workspace/tools/connect_vpn.sh` para `global.ovpn`, ou `/workspace/tools/connect_vpn.sh challenges/cap/cap.ovpn` para um desafio específico).
-*   **Execução de Scans:** Execute scans Nmap diretamente do contêiner. Os resultados serão salvos em `scans/` na raiz do projeto por padrão, ou em uma pasta especificada com `-o`.
+*   **Parar Ambiente:**
     ```bash
-    docker exec -it docker_pentest-env_1 /workspace/tools/nmap_scan.sh <IP_ADDRESS>
+    make down
+    ```
+*   **Limpeza Completa do Ambiente:**
+    ```bash
+    make clean
     ```
 
 ## Convenções
