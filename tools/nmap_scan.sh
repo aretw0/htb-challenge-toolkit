@@ -5,7 +5,7 @@
 
 # Valores Padrão
 SILENT=false
-OUTPUT_DIR="."
+OUTPUT_DIR="scans"
 
 # Função para exibir o modo de uso
 print_usage() {

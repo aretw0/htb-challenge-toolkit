@@ -16,9 +16,9 @@ Compreensão da organização do repositório para localização de arquivos e c
 *   `bin/`: Scripts de gerenciamento do repositório (ex: `create_challenge.sh`).
 *   `docker/`: `Dockerfile` e `docker-compose.yml` para o ambiente Docker.
 *   `vpn/`: Arquivos `.ovpn` (ignorados pelo Git).
-*   `challenges/`: Pastas para cada desafio HTB, contendo `WRITEUP.md` e artefatos.
+*   `challenges/`: Pastas para cada desafio HTB, contendo `WRITEUP.md` e artefatos. Cada pasta de desafio também contém uma subpasta `scans/` para os resultados dos scans.
 *   `templates/`: Templates para novos arquivos (ex: `WRITEUP_TEMPLATE.md`).
-*   `tools/`: Scripts utilitários de pentest (ex: `nmap_scan.sh`).
+*   `tools/`: Contém scripts utilitários de pentest (ex: `nmap_scan.sh`). Os resultados dos scans são salvos automaticamente na pasta `scans/` do desafio atual.
 *   `.env.example`: Exemplo de configuração de variáveis de ambiente.
 
 ## Ambiente de Desenvolvimento
@@ -27,8 +27,8 @@ O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN �
 
 ## Fluxo de Trabalho Comum
 
-*   **Criação de Desafio:** `bin/create_challenge.sh <nome_do_desafio>`
-*   **Execução de Scans:** `tools/nmap_scan.sh <IP_ADDRESS>`
+*   **Criação de Desafio:** `bin/create_challenge.sh <nome_do_desafio>` (Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`.)
+*   **Execução de Scans:** Navegue até o diretório do desafio (ex: `cd challenges/cap/`) e execute o script de scan: `../../tools/nmap_scan.sh <IP_ADDRESS>`. Os resultados serão salvos automaticamente na pasta `scans/` dentro do diretório do desafio.
 
 ## Convenções
 

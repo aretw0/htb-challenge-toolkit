@@ -22,7 +22,8 @@ if [ -d "$CHALLENGE_DIR" ]; then
 fi
 
 # Cria a pasta do desafio
-mkdir -p "$CHALLENGE_DIR"
+  mkdir -p "$CHALLENGE_DIR"
+  mkdir -p "${CHALLENGE_DIR}/scans"
 
 # Copia o template do WRITEUP.md e substitui os placeholders
 cp "$WRITEUP_TEMPLATE" "${CHALLENGE_DIR}/WRITEUP.md"

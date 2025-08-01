@@ -10,7 +10,7 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
 
 *   **Ambiente de Desenvolvimento Isolado:** Utilize Dev Containers (para usuários VS Code) ou Docker Compose (para usuários de terminal) para um ambiente de pentest pré-configurado com ferramentas essenciais como `nmap` e `openvpn`.
 *   **Conexão VPN Automatizada:** Configure sua conexão VPN do HTB para iniciar automaticamente ao subir o ambiente, com validação e feedback claros.
-*   **Scripts Utilitários:** Ferramentas automatizadas para tarefas comuns de reconhecimento e enumeração.
+*   **Scripts Utilitários:** Ferramentas automatizadas para tarefas comuns de reconhecimento e enumeração, com resultados de scans salvos automaticamente na pasta `scans/` de cada desafio.
 *   **Documentação Estruturada:** Um modelo de `WRITEUP.md` para cada máquina, permitindo que você registre seu processo de resolução, desde o reconhecimento até a escalada de privilégios.
 *   **Histórico de Commits Significativo:** Adotamos uma abordagem de commits atômicos para que o histórico do Git reflita o progresso e as decisões tomadas.
 
@@ -34,7 +34,13 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     ./bin/create_challenge.sh <nome_do_desafio>
     ```
     Exemplo: `./bin/create_challenge.sh new_machine`
-    Isso criará `challenges/new_machine/WRITEUP.md` e outras pastas se necessário.
+    Isso criará `challenges/new_machine/WRITEUP.md` e a pasta `challenges/new_machine/scans/`.
+5.  **Execute Scans:**
+    Navegue até o diretório do desafio (ex: `cd challenges/cap/`) e execute o script de scan:
+    ```bash
+    ../../tools/nmap_scan.sh <IP_ADDRESS>
+    ```
+    Os resultados serão salvos automaticamente na pasta `scans/` dentro do diretório do desafio.
 
 ## Estrutura do Projeto
 
@@ -42,7 +48,7 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
 *   `bin/`: Contém scripts para gerenciar o repositório (ex: `create_challenge.sh`).
 *   `docker/`: Contém o `Dockerfile` e o `docker-compose.yml` para o ambiente Docker.
 *   `vpn/`: Pasta para seus arquivos de configuração `.ovpn` (ignorada pelo Git).
-*   `challenges/`: Contém as pastas para cada desafio HTB, cada uma com seu `WRITEUP.md` e artefatos específicos.
+*   `challenges/`: Contém as pastas para cada desafio HTB, cada uma com seu `WRITEUP.md` e artefatos específicos. Cada pasta de desafio também contém uma subpasta `scans/` para os resultados dos scans.
 *   `templates/`: Contém templates para novos desafios (ex: `WRITEUP_TEMPLATE.md`).
 *   `tools/`: Contém scripts utilitários de pentest (ex: `nmap_scan.sh`).
 *   `GEMINI.md`: Diretrizes de colaboração para o Gemini (este assistente).
