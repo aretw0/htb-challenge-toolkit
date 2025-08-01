@@ -25,11 +25,11 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     Após iniciar o ambiente, você precisará iniciar a conexão VPN manualmente dentro do contêiner. O script `connect_vpn.sh` está disponível para isso.
     -   **Conectar com `global.ovpn` (padrão):**
         ```bash
-        docker exec -it docker_pentest-env_1 /usr/local/bin/connect_vpn.sh
+        docker exec -it docker_pentest-env_1 /workspace/tools/connect_vpn.sh
         ```
     -   **Conectar com um arquivo `.ovpn` específico:**
         ```bash
-        docker exec -it docker_pentest-env_1 /usr/local/bin/connect_vpn.sh challenges/seu_desafio/seu_desafio.ovpn
+        docker exec -it docker_pentest-env_1 /workspace/tools/connect_vpn.sh challenges/seu_desafio/seu_desafio.ovpn
         ```
         Substitua `seu_desafio/seu_desafio.ovpn` pelo caminho real do seu arquivo `.ovpn` relativo à raiz do projeto.
     -   **Verificar a conexão:** Após executar o comando, você pode verificar os logs do contêiner para confirmar a conexão:

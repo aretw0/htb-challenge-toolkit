@@ -75,9 +75,9 @@ Este documento registra a evolução do projeto HTB-Challenge-Toolkit e a colabo
 - **Simplificação do Script de Conexão VPN:**
     - **Problema:** O script `start_vpn.sh` estava sobrecarregado com lógica de prioridade de arquivos `.ovpn` e dependência de variáveis de ambiente.
     - **Solução Implementada:**
-        - Renomeado `docker/start_vpn.sh` para `docker/connect_vpn.sh`.
+        - Renomeado `docker/start_vpn.sh` para `tools/connect_vpn.sh`.
         - Simplificação da lógica de `connect_vpn.sh`: agora aceita o caminho do arquivo `.ovpn` como argumento. Se nenhum argumento for fornecido, ele tenta usar `/workspace/global.ovpn` como padrão.
-        - O script agora é executado manualmente pelo usuário dentro do contêiner (`docker exec -it <container_id> /usr/local/bin/connect_vpn.sh [caminho/do/ovpn]`).
+        - O script agora é executado manualmente pelo usuário dentro do contêiner (`docker exec -it <container_id> /workspace/tools/connect_vpn.sh [caminho/do/ovpn]`).
 - **Simplificação do Script de Scan Nmap:**
     - **Problema:** O script `nmap_scan.sh` tentava inferir o diretório de saída com base em `CHALLENGE_NAME`, adicionando complexidade.
     - **Solução Implementada:**

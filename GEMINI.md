@@ -38,9 +38,9 @@ O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN n
     ```
 *   **Conexão VPN:** Após o ambiente estar em execução, conecte a VPN manualmente.
     ```bash
-    docker exec -it docker_pentest-env_1 /usr/local/bin/connect_vpn.sh [caminho/do/ovpn]
+    docker exec -it docker_pentest-env_1 /workspace/tools/connect_vpn.sh [caminho/do/ovpn]
     ```
-    (Ex: `/usr/local/bin/connect_vpn.sh` para `global.ovpn`, ou `/usr/local/bin/connect_vpn.sh challenges/cap/cap.ovpn` para um desafio específico).
+    (Ex: `/workspace/tools/connect_vpn.sh` para `global.ovpn`, ou `/workspace/tools/connect_vpn.sh challenges/cap/cap.ovpn` para um desafio específico).
 *   **Execução de Scans:** Execute scans Nmap diretamente do contêiner. Os resultados serão salvos em `scans/` na raiz do projeto por padrão, ou em uma pasta especificada com `-o`.
     ```bash
     docker exec -it docker_pentest-env_1 /workspace/tools/nmap_scan.sh <IP_ADDRESS>
