@@ -4,14 +4,14 @@ Bem-vindo ao **HTB-Challenge-Toolkit**! Este repositório foi criado para ser su
 
 ## Propósito
 
-Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portátil, juntamente com scripts utilitários e uma estrutura de documentação para cada máquina HTB que você resolver. Embora tenhamos começado com o desafio "Cap", este repositório é projetado para ser uma solução de longo prazo para suas jornadas de pentest.
+Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portátil, juntamente com scripts utilitários e uma estrutura de documentação para cada **desafio** da plataforma Hack The Box que você resolver. Embora tenhamos começado com o **desafio** "Cap", este repositório é projetado para ser uma solução de longo prazo para suas jornadas de pentest.
 
 ## Funcionalidades Principais
 
 *   **Ambiente de Desenvolvimento Isolado:** Utilize Dev Containers (para usuários VS Code) ou Docker Compose (para usuários de terminal) para um ambiente de pentest pré-configurado com ferramentas essenciais como `nmap` e `openvpn`.
 *   **Conexão VPN Automatizada:** Configure sua conexão VPN do HTB para iniciar automaticamente ao subir o ambiente, com validação e feedback claros.
 *   **Scripts Utilitários:** Ferramentas automatizadas para tarefas comuns de reconhecimento e enumeração, com resultados de scans salvos automaticamente na pasta `scans/` de cada desafio.
-*   **Documentação Estruturada:** Um modelo de `WRITEUP.md` para cada máquina, permitindo que você registre seu processo de resolução, desde o reconhecimento até a escalada de privilégios.
+*   **Documentação Estruturada:** Um modelo de `WRITEUP.md` para cada **desafio**, permitindo que você registre seu processo de resolução, desde o reconhecimento até a escalada de privilégios.
 *   **Histórico de Commits Significativo:** Adotamos uma abordagem de commits atômicos para que o histórico do Git reflita o progresso e as decisões tomadas.
 
 ## Como Começar
@@ -33,8 +33,8 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     ```bash
     ./bin/create_challenge.sh <nome_do_desafio>
     ```
-    Exemplo: `./bin/create_challenge.sh new_machine`
-    Isso criará `challenges/new_machine/WRITEUP.md` e a pasta `challenges/new_machine/scans/`.
+    Exemplo: `./bin/create_challenge.sh path_of_glory` (para um Path) ou `./bin/create_challenge.sh cap` (para uma máquina individual).
+    Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`.
 5.  **Execute Scans:**
     Navegue até o diretório do desafio (ex: `cd challenges/cap/`) e execute o script de scan:
     ```bash

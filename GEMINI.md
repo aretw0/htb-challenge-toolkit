@@ -27,7 +27,7 @@ O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN �
 
 ## Fluxo de Trabalho Comum
 
-*   **Criação de Desafio:** `bin/create_challenge.sh <nome_do_desafio>` (Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`.)
+*   **Criação de Desafio:** `bin/create_challenge.sh <nome_do_desafio>` (Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`. O nome do desafio pode ser o nome de uma máquina individual ou de um Path/Desafio com múltiplas máquinas.)
 *   **Execução de Scans:** Navegue até o diretório do desafio (ex: `cd challenges/cap/`) e execute o script de scan: `../../tools/nmap_scan.sh <IP_ADDRESS>`. Os resultados serão salvos automaticamente na pasta `scans/` dentro do diretório do desafio.
 
 ## Convenções

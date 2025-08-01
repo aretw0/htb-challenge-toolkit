@@ -1,12 +1,12 @@
-# Relatório de Resolução - Hack The Box: [NOME_DA_MAQUINA]
+# Relatório de Resolução - Hack The Box: [NOME_DO_DESAFIO]
 
 **Autor:** [SEU_NOME]
 **Data de Início:** [DATA_ATUAL]
-**Máquina:** [NOME_DA_MAQUINA]
+**Desafio:** [NOME_DO_DESAFIO]
 
 ## Objetivo
 
-Este documento serve para registrar o processo de análise e exploração da máquina "[NOME_DA_MAQUINA]" da plataforma Hack The Box.
+Este documento serve para registrar o processo de análise e exploração do desafio "[NOME_DO_DESAFIO]" da plataforma Hack The Box, que pode envolver uma ou mais máquinas.
 
 ---
 
@@ -19,22 +19,56 @@ Este documento serve para registrar o processo de análise e exploração da má
 
 ---
 
-## Fase de Reconhecimento
+## Máquinas Envolvidas
 
-*Nesta seção, vamos documentar a varredura inicial de portas, serviços e tecnologias utilizadas pela máquina alvo.*
+*Nesta seção, liste e descreva brevemente cada máquina que faz parte deste desafio.*
 
-## Fase de Enumeração
+### [NOME_DA_MAQUINA_1]
 
-*Aqui, detalharemos a enumeração de cada serviço encontrado, em busca de vulnerabilidades ou informações úteis.*
+*   **IP:** [IP_DA_MAQUINA_1]
+*   **Dificuldade:** [DIFICULDADE_DA_MAQUINA_1]
+*   **Sinopse:** [SINOPSE_DA_MAQUINA_1]
 
-## Obtenção de Acesso Inicial
+#### Fase de Reconhecimento
+
+*Nesta subseção, documente a varredura inicial de portas, serviços e tecnologias para esta máquina.*
+
+#### Fase de Enumeração
+
+*Aqui, detalhe a enumeração de cada serviço encontrado, em busca de vulnerabilidades ou informações úteis para esta máquina.*
+
+#### Obtenção de Acesso Inicial
 
 *Registro do método utilizado para conseguir o primeiro acesso à máquina (usuário comum).*
 
-## Escalação de Privilégio
+#### Escalação de Privilégio
 
 *Passos detalhados sobre como o acesso de usuário foi escalado para privilégios de administrador (root).*
 
-## Coleta de Provas (Flags)
+#### Coleta de Provas (Flags)
 
-*Localização e conteúdo das flags de usuário e root.*
+*Localização e conteúdo das flags de usuário e root para esta máquina.*
+
+---
+
+### [NOME_DA_MAQUINA_2] (se aplicável)
+
+*   **IP:** [IP_DA_MAQUINA_2]
+*   **Dificuldade:** [DIFICULDADE_DA_MAQUINA_2]
+*   **Sinopse:** [SINOPSE_DA_MAQUINA_2]
+
+#### Fase de Reconhecimento
+
+#### Fase de Enumeração
+
+#### Obtenção de Acesso Inicial
+
+#### Escalação de Privilégio
+
+#### Coleta de Provas (Flags)
+
+---
+
+## Conclusão do Desafio
+
+*Resumo geral do desafio, lições aprendidas e quaisquer observações finais.*

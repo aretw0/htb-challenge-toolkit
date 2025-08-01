@@ -31,7 +31,18 @@ cp "$WRITEUP_TEMPLATE" "${CHALLENGE_DIR}/WRITEUP.md"
 # Substitui placeholders no WRITEUP.md
 DATE_NOW=$(date +%Y-%m-%d)
 sed -i "s/\[NOME_DA_MAQUINA\]/${CHALLENGE_NAME}/g" "${CHALLENGE_DIR}/WRITEUP.md"
+sed -i "s/\[NOME_DO_DESAFIO\]/${CHALLENGE_NAME}/g" "${CHALLENGE_DIR}/WRITEUP.md"
 sed -i "s/\[SEU_NOME\]/aretw0/g" "${CHALLENGE_DIR}/WRITEUP.md" # Pode ser alterado para uma variável de ambiente ou input
 sed -i "s/\[DATA_ATUAL\]/${DATE_NOW}/g" "${CHALLENGE_DIR}/WRITEUP.md"
+
+# Remove placeholders específicos de máquina, se existirem
+sed -i "/^\[NOME_DA_MAQUINA_1\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
+sed -i "/^\[IP_DA_MAQUINA_1\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
+sed -i "/^\[DIFICULDADE_DA_MAQUINA_1\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
+sed -i "/^\[SINOPSE_DA_MAQUINA_1\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
+sed -i "/^\[NOME_DA_MAQUINA_2\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
+sed -i "/^\[IP_DA_MAQUINA_2\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
+sed -i "/^\[DIFICULDADE_DA_MAQUINA_2\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
+sed -i "/^\[SINOPSE_DA_MAQUINA_2\]/d" "${CHALLENGE_DIR}/WRITEUP.md"
 
 echo "Estrutura do desafio '${CHALLENGE_NAME}' criada em '${CHALLENGE_DIR}'."
