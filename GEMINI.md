@@ -19,7 +19,7 @@ Understanding the repository organization for file location and context:
 *   `challenges/`: Folders for each HTB challenge, containing `WRITEUP.md` and specific artifacts. Each challenge folder also contains a `scans/` subfolder for scan results.
 *   `docs/`: Contains detailed documentation about the project architecture and Architectural Decision Records (ADRs).
     *   `docs/architecture/`: Diagrams and explanations about the Docker and VPN architecture.
-    *   `docs/adr/`: Architectural Decision Records (ADRs) that document the "why" behind key design choices.
+    *   `docs/adr/`: Architectural Decision Records (ADRs) that document the "why" behind key design choices. **When creating or modifying ADRs, remember to also update `JOURNAL.md` to keep the summary consistent.**
 *   `templates/`: Templates for new files (e.g., `WRITEUP_TEMPLATE.md`).
 *   `tools/`: Contains pentest utility scripts (e.g., `nmap_scan.sh`). Scan results are automatically saved in the `scans/` folder of the current challenge.
 

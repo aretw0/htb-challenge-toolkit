@@ -20,7 +20,7 @@ This project is a Hack The Box challenge toolkit with a focus on a streamlined a
     *   `tools/`: Pentest utility scripts.
     *   `challenges/`: Challenge-specific files and writeups.
     *   `docker/`: Dockerfile and docker-compose.yml.
-    *   `docs/`: Detailed documentation, including ADRs and architecture diagrams.
+    *   `docs/`: Detailed documentation, including ADRs and architecture diagrams. **When creating or modifying ADRs, remember to also update `JOURNAL.md` to keep the summary consistent.**
 *   **Key Scripts:**
     *   `bin/create_challenge.sh`: For creating new challenge structures.
     *   `tools/connect_vpn.sh`: For manual VPN connection.
