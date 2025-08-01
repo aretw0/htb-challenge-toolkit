@@ -23,7 +23,7 @@ Compreensão da organização do repositório para localização de arquivos e c
 
 ## Ambiente de Desenvolvimento
 
-O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN é iniciada automaticamente ao subir o contêiner, gerenciada pelo script `docker/start_vpn.sh`, que agora prioriza arquivos `.ovpn` específicos do desafio ou um `global.ovpn` na raiz do projeto, sem a necessidade de variáveis de ambiente adicionais.
+O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN é iniciada automaticamente ao subir o contêiner, gerenciada pelo script `docker/start_vpn.sh`, que agora prioriza arquivos `.ovpn` específicos do desafio (definidos via `CHALLENGE_NAME` em um arquivo `.env` na raiz do projeto) ou um `global.ovpn` na raiz do projeto.
 
 ## Fluxo de Trabalho Comum
 
