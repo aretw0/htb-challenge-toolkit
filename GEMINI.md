@@ -32,6 +32,13 @@ O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN n
 ## Fluxo de Trabalho Comum
 
 *   **Criação de Desafio:** `bin/create_challenge.sh <nome_do_desafio>` (Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`. O nome do desafio pode ser o nome de uma máquina individual ou de um Path/Desafio com múltiplas máquinas.)
+
+**Nota para Usuários de VS Code Dev Containers:**
+Quando você abre o projeto em um Dev Container, o terminal do VS Code já está *dentro* do contêiner `pentest-env`. Isso significa que:
+- Comandos `make` como `make shell`, `make vpn-global`, `make vpn-challenge`, e `make nmap-scan` ainda funcionarão, mas eles farão uma chamada `docker exec` redundante para o próprio contêiner onde você já está.
+- Para maior eficiência, é recomendado executar os scripts diretamente pelo caminho completo dentro do contêiner, por exemplo: `/workspace/tools/connect_vpn.sh` ou `/workspace/tools/nmap_scan.sh <IP_ADDRESS>`.
+- Os comandos `make up`, `make down`, e `make clean` ainda são úteis para gerenciar o ciclo de vida do contêiner a partir do seu terminal local (fora do Dev Container).
+
 *   **Início do Ambiente:**
     ```bash
     make up

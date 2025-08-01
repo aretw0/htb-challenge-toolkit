@@ -106,6 +106,12 @@ Este documento registra a evolução do projeto HTB-Challenge-Toolkit e a colabo
         - `make nmap-scan IP=<ip_alvo> [OUTPUT_DIR=<diretorio_saida>]`: Executar um scan Nmap.
     - **Impacto:** Simplifica significativamente a experiência do desenvolvedor, tornando os comandos mais curtos e fáceis de lembrar.
 
+- **Clarificação da Experiência do Desenvolvedor (VS Code Dev Containers vs. Terminal):**
+    - **Problema:** A introdução do `Makefile` poderia gerar confusão para usuários de VS Code Dev Containers, pois muitos dos comandos `make` replicam funcionalidades já disponíveis diretamente no terminal do contêiner.
+    - **Solução Implementada:** Atualização do `README.md` e `GEMINI.md` para:
+        - Explicar que, dentro de um Dev Container, o usuário já está no shell do contêiner.
+        - Recomendar a execução direta dos scripts (`/workspace/tools/connect_vpn.sh`, `/workspace/tools/nmap_scan.sh`) para maior eficiência, enquanto ainda reconhece a utilidade dos comandos `make` para gerenciamento do ciclo de vida do contêiner (ex: `make down`, `make clean`).
+
 ## 7. Próximos Passos
 
 - Iniciar a fase de Reconhecimento e Enumeração para o desafio "Cap".

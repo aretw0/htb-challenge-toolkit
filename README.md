@@ -37,7 +37,7 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
         docker-compose -f docker/docker-compose.yml logs pentest-env
         ```
 3.  **Inicie o Ambiente de Desenvolvimento:**
-    - **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme.
+    - **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme. Uma vez dentro do Dev Container, você já estará no terminal do contêiner. Você pode usar os comandos `make` para gerenciar o ambiente Docker (como `make down` ou `make clean`), mas para executar scripts dentro do contêiner (como `connect_vpn.sh` ou `nmap_scan.sh`), é mais eficiente executá-los diretamente pelo caminho `/workspace/tools/`.
     - **Para usuários de Terminal (Docker Compose via Makefile):**
         O `Makefile` na raiz do projeto simplifica a interação com o ambiente Docker Compose.
         - **Iniciar o ambiente:**
