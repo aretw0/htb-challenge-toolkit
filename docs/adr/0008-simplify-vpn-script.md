@@ -1,17 +1,17 @@
-# 0008 - Simplification of VPN Connection Script
+# 0008 - Simplificação do Script de Conexão VPN
 
 ## Status
-Accepted
+Aceito
 
-## Context
-The `start_vpn.sh` script was overloaded with `.ovpn` file priority logic and environment variable dependencies.
+## Contexto
+O script `start_vpn.sh` estava sobrecarregado com a lógica de prioridade de arquivos `.ovpn` e dependências de variáveis de ambiente.
 
-## Decision
-- Renamed `docker/start_vpn.sh` to `tools/connect_vpn.sh`.
-- Simplified the logic of `connect_vpn.sh`: it now accepts the `.ovpn` file path as an argument. If no argument is provided, it defaults to `/workspace/global.ovpn`.
-- The script is now executed manually by the user inside the container (`docker exec -it <container_id> /workspace/tools/connect_vpn.sh [path/to/ovpn]`).
+## Decisão
+- Renomeado `docker/start_vpn.sh` para `tools/connect_vpn.sh`.
+- Simplificada a lógica de `connect_vpn.sh`: agora aceita o caminho do arquivo `.ovpn` como argumento. Se nenhum argumento for fornecido, ele assume `/workspace/global.ovpn` por padrão.
+- O script agora é executado manualmente pelo usuário dentro do contêiner (`docker exec -it <container_id> /workspace/tools/connect_vpn.sh [caminho/do/ovpn]`).
 
-## Consequences
-- Cleaner and more focused VPN connection script.
-- Explicit control over which `.ovpn` file to use.
-- Reduced complexity in the overall environment setup.
+## Consequências
+- Script de conexão VPN mais limpo e focado.
+- Controle explícito sobre qual arquivo `.ovpn` usar.
+- Redução da complexidade na configuração geral do ambiente.

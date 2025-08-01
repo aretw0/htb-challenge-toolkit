@@ -1,15 +1,15 @@
-# 0012 - Standardization of Docker Compose Execution
+# 0012 - Padronização da Execução do Docker Compose
 
 ## Status
-Accepted
+Aceito
 
-## Context
-The previous documentation suggested executing `docker-compose` from subdirectories, which could lead to inconsistencies and confusion regarding context.
+## Contexto
+A documentação anterior sugeria a execução do `docker-compose` a partir de subdiretórios, o que poderia levar a inconsistências e confusão em relação ao contexto.
 
-## Decision
-The documentation now explicitly emphasizes that `docker-compose` commands should always be executed from the project root directory.
+## Decisão
+A documentação agora enfatiza explicitamente que os comandos `docker-compose` devem ser sempre executados a partir do diretório raiz do projeto.
 
-## Consequences
-- Ensures consistent behavior and context for all Docker Compose operations.
-- Simplifies user instructions and reduces potential errors.
-- Aligns with common best practices for Docker Compose projects.
+## Consequências
+- Garante comportamento e contexto consistentes para todas as operações do Docker Compose.
+- Simplifica as instruções do usuário e reduz potenciais erros.
+- Alinha-se com as melhores práticas comuns para projetos Docker Compose.

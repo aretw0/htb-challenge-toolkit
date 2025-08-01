@@ -1,15 +1,15 @@
-# 0004 - Git Ignoring of Challenge Directories
+# 0004 - Ignorando Diretórios de Desafios no Git
 
 ## Status
-Accepted
+Aceito
 
-## Context
-The `challenges/` directory contained challenge-specific files that should not be versioned to maintain the repository's generic nature.
+## Contexto
+O diretório `challenges/` continha arquivos específicos de desafios que não deveriam ser versionados para manter a natureza genérica do repositório.
 
-## Decision
-Updated the `.gitignore` file to ignore all content within `challenges/` except for the `.gitkeep` file. This ensures that the directory structure is maintained in the repository while allowing challenge-specific files to remain untracked.
+## Decisão
+Atualizado o arquivo `.gitignore` para ignorar todo o conteúdo dentro de `challenges/`, exceto o arquivo `.gitkeep`. Isso garante que a estrutura do diretório seja mantida no repositório, permitindo que arquivos específicos de desafios permaneçam sem rastreamento.
 
-## Consequences
-- Prevents accidental versioning of sensitive or challenge-specific files.
-- Maintains a clean and generic repository for the toolkit.
-- Ensures the `challenges/` directory structure is present for new users.
+## Consequências
+- Impede o versionamento acidental de arquivos sensíveis ou específicos de desafios.
+- Mantém um repositório limpo e genérico para o kit de ferramentas.
+- Garante que a estrutura do diretório `challenges/` esteja presente para novos usuários.

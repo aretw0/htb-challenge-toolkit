@@ -1,17 +1,17 @@
-# 0009 - Simplification of Nmap Scan Script
+# 0009 - Simplificação do Script de Varredura Nmap
 
 ## Status
-Accepted
+Aceito
 
-## Context
-The `nmap_scan.sh` script attempted to infer the output directory based on `CHALLENGE_NAME`, adding unnecessary complexity.
+## Contexto
+O script `nmap_scan.sh` tentava inferir o diretório de saída com base em `CHALLENGE_NAME`, adicionando complexidade desnecessária.
 
-## Decision
-- Removed the `CHALLENGE_NAME` detection logic from `tools/nmap_scan.sh`.
-- The `OUTPUT_DIR` now defaults to `scans/` in the project root, or can be explicitly specified with the `-o` option.
-- The script now creates the output directory (`scans/`) if it does not exist.
+## Decisão
+- Removida a lógica de detecção de `CHALLENGE_NAME` de `tools/nmap_scan.sh`.
+- O `OUTPUT_DIR` agora assume `scans/` na raiz do projeto por padrão, ou pode ser explicitamente especificado com a opção `-o`.
+- O script agora cria o diretório de saída (`scans/`) se ele não existir.
 
-## Consequences
-- Simplified the Nmap scan script, making it more straightforward to use.
-- Provided clear default behavior for scan output.
-- Allowed for explicit control over output location when needed.
+## Consequências
+- Simplificação do script de varredura Nmap, tornando-o mais direto de usar.
+- Comportamento padrão claro para a saída da varredura.
+- Permitiu controle explícito sobre o local de saída quando necessário.

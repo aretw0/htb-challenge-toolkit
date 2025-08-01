@@ -20,7 +20,3 @@ Para detalhes completos sobre as decisões e suas justificativas, consulte os se
 - [ADR 0012: Standardization of Docker Compose Execution](docs/adr/0012-standardize-docker-compose-execution.md)
 - [ADR 0013: Introduction of Makefile for Command Simplification](docs/adr/0013-introduce-makefile.md)
 - [ADR 0014: Clarification of Developer Experience (VS Code Dev Containers vs. Terminal)](docs/adr/0014-clarify-dev-experience.md)
-
-## Próximos Passos
-
-- Iniciar a fase de Reconhecimento e Enumeração para o desafio "Cap".

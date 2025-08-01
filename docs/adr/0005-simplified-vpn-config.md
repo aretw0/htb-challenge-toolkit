@@ -1,20 +1,20 @@
-# 0005 - Simplified and Flexible VPN Configuration
+# 0005 - Configuração VPN Simplificada e Flexível
 
 ## Status
-Accepted
+Aceito
 
-## Context
-The previous VPN configuration required manual definition of environment variables, which was not ideal for different development environments (terminal vs. VS Code Dev Containers).
+## Contexto
+A configuração VPN anterior exigia a definição manual de variáveis de ambiente, o que não era ideal para diferentes ambientes de desenvolvimento (terminal vs. VS Code Dev Containers).
 
-## Decision
-- Refactored the `docker/start_vpn.sh` script (now `tools/connect_vpn.sh`) to implement a priority chain for `.ovpn` file lookup:
-    1.  Explicit path via argument (highest priority).
-    2.  `challenges/<CHALLENGE_NAME>/<CHALLENGE_NAME>.ovpn` (if `CHALLENGE_NAME` is provided).
+## Decisão
+- Refatorado o script `docker/start_vpn.sh` (agora `tools/connect_vpn.sh`) para implementar uma cadeia de prioridade para a busca de arquivos `.ovpn`:
+    1.  Caminho explícito via argumento (maior prioridade).
+    2.  `challenges/<CHALLENGE_NAME>/<CHALLENGE_NAME>.ovpn` (se `CHALLENGE_NAME` for fornecido).
     3.  `/workspace/global.ovpn` (fallback).
-- Removed explicit `OVPN_CONFIG_FILE` configuration from `.devcontainer/devcontainer.json`, relying on automatic `.env` reading by the Dev Container.
-- Updated `README.md`, `GEMINI.md`, and `.env.example` to clearly document the new priority chain and methods for defining `OVPN_CONFIG_FILE` and `CHALLENGE_NAME` (via `.env` or command line).
+- Removida a configuração explícita de `OVPN_CONFIG_FILE` de `.devcontainer/devcontainer.json`, confiando na leitura automática de `.env` pelo Dev Container.
+- Atualizados `README.md`, `GEMINI.md` e `.env.example` para documentar claramente a nova cadeia de prioridade e os métodos para definir `OVPN_CONFIG_FILE` e `CHALLENGE_NAME` (via `.env` ou linha de comando).
 
-## Consequences
-- More flexible and user-friendly VPN configuration.
-- Reduced manual setup steps for different environments.
-- Clearer documentation on VPN connection options.
+## Consequências
+- Configuração VPN mais flexível e amigável ao usuário.
+- Redução das etapas de configuração manual para diferentes ambientes.
+- Documentação mais clara sobre as opções de conexão VPN.

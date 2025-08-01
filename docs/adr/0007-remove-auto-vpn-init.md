@@ -1,17 +1,17 @@
-# 0007 - Removal of Automatic VPN Initialization
+# 0007 - Remoção da Inicialização Automática da VPN
 
 ## Status
-Accepted
+Aceito
 
-## Context
-Automatic VPN initialization in the `postStartCommand` of the Dev Container and the `command` of `docker-compose.yml` introduced unnecessary complexity and dependencies.
+## Contexto
+A inicialização automática da VPN no `postStartCommand` do Dev Container e no `command` do `docker-compose.yml` introduziu complexidade e dependências desnecessárias.
 
-## Decision
-- Removed `command: /usr/local/bin/start_vpn.sh` from `docker/docker-compose.yml`.
-- Removed `postStartCommand: /usr/local/bin/start_vpn.sh` from `.devcontainer/devcontainer.json`.
-- The container now starts with its default shell, and the VPN connection is initiated manually by the user.
+## Decisão
+- Removido `command: /usr/local/bin/start_vpn.sh` de `docker/docker-compose.yml`.
+- Removido `postStartCommand: /usr/local/bin/start_vpn.sh` de `.devcontainer/devcontainer.json`.
+- O contêiner agora inicia com seu shell padrão, e a conexão VPN é iniciada manualmente pelo usuário.
 
-## Consequences
-- Simplified the environment setup by removing implicit behaviors.
-- Gave developers explicit control over when to initiate the VPN connection.
-- Reduced potential issues related to VPN startup failures during environment initialization.
+## Consequências
+- Simplificação da configuração do ambiente pela remoção de comportamentos implícitos.
+- Concedeu aos desenvolvedores controle explícito sobre quando iniciar a conexão VPN.
+- Redução de potenciais problemas relacionados a falhas na inicialização da VPN durante a inicialização do ambiente.

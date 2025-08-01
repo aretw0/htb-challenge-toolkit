@@ -1,18 +1,18 @@
-# 0014 - Clarification of Developer Experience (VS Code Dev Containers vs. Terminal)
+# 0014 - Esclarecimento da Experiência do Desenvolvedor (VS Code Dev Containers vs. Terminal)
 
 ## Status
-Accepted
+Aceito
 
-## Context
-The introduction of the `Makefile` could create confusion for VS Code Dev Container users, as many `make` commands duplicate functionality already available directly in the container's terminal.
+## Contexto
+A introdução do `Makefile` poderia criar confusão para usuários de VS Code Dev Containers, pois muitos comandos `make` duplicam funcionalidades já disponíveis diretamente no terminal do contêiner.
 
-## Decision
-Updated `README.md` and `GEMINI.md` to:
-- Explain that, inside a Dev Container, the user is already in the container's shell.
-- Recommend direct execution of scripts (`/workspace/tools/connect_vpn.sh`, `/workspace/tools/nmap_scan.sh`) for greater efficiency when inside the container.
-- Acknowledge the continued utility of `make` commands for container lifecycle management (e.g., `make down`, `make clean`) from the host terminal.
+## Decisão
+Atualizados `README.md` e `GEMINI.md` para:
+- Explicar que, dentro de um Dev Container, o usuário já está no shell do contêiner.
+- Recomendar a execução direta de scripts (`/workspace/tools/connect_vpn.sh`, `/workspace/tools/nmap_scan.sh`) para maior eficiência quando dentro do contêiner.
+- Reconhecer a utilidade contínua dos comandos `make` para o gerenciamento do ciclo de vida do contêiner (ex: `make down`, `make clean`) a partir do terminal do host.
 
-## Consequences
-- Provided clear guidance for users across different development environments.
-- Optimized workflow for VS Code Dev Container users by promoting direct script execution.
-- Reduced potential confusion and improved overall user experience.
+## Consequências
+- Forneceu orientação clara para usuários em diferentes ambientes de desenvolvimento.
+- Otimizou o fluxo de trabalho para usuários de VS Code Dev Containers, promovendo a execução direta de scripts.
+- Reduziu a potencial confusão e melhorou a experiência geral do usuário.

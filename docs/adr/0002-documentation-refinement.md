@@ -1,19 +1,19 @@
-# 0002 - Documentation Refinement and Conventions
+# 0002 - Refinamento da Documentação e Convenções
 
 ## Status
-Accepted
+Aceito
 
-## Context
-To ensure clear communication and consistent development practices, documentation and conventions needed refinement.
+## Contexto
+Para garantir uma comunicação clara e práticas de desenvolvimento consistentes, a documentação e as convenções precisavam de refinamento.
 
-## Decision
-- **`GEMINI.md` Refactoring:** Refactored `GEMINI.md` to be concise and focused on collaboration guidelines for Gemini, including atomic commits, self-documentation, and tool prioritization.
-- **Scan Log Management:**
-    - Modified `bin/create_challenge.sh` to automatically create a `scans/` subdirectory within each challenge directory.
-    - Modified `tools/nmap_scan.sh` to save scan results to the `scans/` folder by default.
-    - Updated `README.md` and `GEMINI.md` to instruct users to navigate to the challenge directory before running `nmap_scan.sh`.
+## Decisão
+- **Refatoração de `GEMINI.md`:** Refatorado `GEMINI.md` para ser conciso e focado nas diretrizes de colaboração para o Gemini, incluindo commits atômicos, autodocumentação e priorização de ferramentas.
+- **Gerenciamento de Logs de Varredura:**
+    - Modificado `bin/create_challenge.sh` para criar automaticamente um subdiretório `scans/` dentro de cada diretório de desafio.
+    - Modificado `tools/nmap_scan.sh` para salvar os resultados da varredura na pasta `scans/` por padrão.
+    - Atualizado `README.md` e `GEMINI.md` para instruir os usuários a navegar até o diretório do desafio antes de executar `nmap_scan.sh`.
 
-## Consequences
-- Improved clarity and consistency in documentation.
-- Centralized scan results within challenge directories, preventing repository clutter.
-- Clearer guidelines for Gemini's interaction and contribution.
+## Consequências
+- Melhoria na clareza e consistência da documentação.
+- Resultados de varredura centralizados dentro dos diretórios de desafio, evitando a desorganização do repositório.
+- Diretrizes mais claras para a interação e contribuição do Gemini.

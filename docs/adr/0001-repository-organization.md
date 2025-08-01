@@ -1,24 +1,24 @@
-# 0001 - Repository Organization and Structure
+# 0001 - Organização e Estrutura do Repositório
 
 ## Status
-Accepted
+Aceito
 
-## Context
-The initial repository structure needed clear organization for scripts and documentation to support a generic Hack The Box challenge toolkit.
+## Contexto
+A estrutura inicial do repositório precisava de uma organização clara para scripts e documentação, a fim de suportar um kit de ferramentas genérico para desafios Hack The Box.
 
-## Decision
-- **Script Directories:**
-    - Created `bin/` for repository management scripts (e.g., `create_challenge.sh`).
-    - Created `tools/` for pentest utility scripts (e.g., `nmap_scan.sh`).
-- **Templates:**
-    - Created `templates/` and `templates/WRITEUP_TEMPLATE.md` to standardize challenge documentation.
-- **Challenge Creation Automation:**
-    - Developed `bin/create_challenge.sh` to automate the creation of new challenge folder structures, including copying `WRITEUP_TEMPLATE.md`.
-- **VS Code Integration:**
-    - Configured `.vscode/tasks.json` to allow `create_challenge.sh` to be executed directly from VS Code.
+## Decisão
+- **Diretórios de Scripts:**
+    - Criado `bin/` para scripts de gerenciamento do repositório (ex: `create_challenge.sh`).
+    - Criado `tools/` para scripts utilitários de pentest (ex: `nmap_scan.sh`).
+- **Modelos (Templates):**
+    - Criado `templates/` e `templates/WRITEUP_TEMPLATE.md` para padronizar a documentação de desafios.
+- **Automação da Criação de Desafios:**
+    - Desenvolvido `bin/create_challenge.sh` para automatizar a criação de novas estruturas de pastas de desafios, incluindo a cópia de `WRITEUP_TEMPLATE.md`.
+- **Integração com VS Code:**
+    - Configurado `.vscode/tasks.json` para permitir que `create_challenge.sh` seja executado diretamente do VS Code.
 
-## Consequences
-- Improved clarity and separation of concerns for different types of scripts.
-- Standardized documentation for challenges.
-- Streamlined the process of setting up new challenges.
-- Enhanced developer experience for VS Code users.
+## Consequências
+- Melhoria na clareza e separação de responsabilidades para diferentes tipos de scripts.
+- Documentação padronizada para desafios.
+- Processo simplificado de configuração de novos desafios.
+- Experiência do desenvolvedor aprimorada para usuários do VS Code.

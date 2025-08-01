@@ -1,22 +1,22 @@
-# 0013 - Introduction of Makefile for Command Simplification
+# 0013 - Introdução do Makefile para Simplificação de Comandos
 
 ## Status
-Accepted
+Aceito
 
-## Context
-Executing Docker Compose commands and utility scripts often required long and repetitive commands, especially for terminal users.
+## Contexto
+A execução de comandos Docker Compose e scripts utilitários frequentemente exigia comandos longos e repetitivos, especialmente para usuários de terminal.
 
-## Decision
-A `Makefile` was created in the project root with targets to simplify common operations:
-- `make up`: Start the Docker Compose environment.
-- `make down`: Stop the Docker Compose environment.
-- `make clean`: Stop and remove all Docker Compose resources.
-- `make shell`: Access the container shell.
-- `make vpn-global`: Connect to VPN using `global.ovpn`.
-- `make vpn-challenge CHALLENGE=<challenge_name>`: Connect to a challenge-specific VPN.
-- `make nmap-scan IP=<target_ip> [OUTPUT_DIR=<output_directory>]`: Execute an Nmap scan.
+## Decisão
+Um `Makefile` foi criado na raiz do projeto com alvos para simplificar operações comuns:
+- `make up`: Iniciar o ambiente Docker Compose.
+- `make down`: Parar o ambiente Docker Compose.
+- `make clean`: Parar e remover todos os recursos do Docker Compose.
+- `make shell`: Acessar o shell do contêiner.
+- `make vpn-global`: Conectar à VPN usando `global.ovpn`.
+- `make vpn-challenge CHALLENGE=<nome_do_desafio>`: Conectar a uma VPN específica do desafio.
+- `make nmap-scan IP=<ip_alvo> [OUTPUT_DIR=<diretorio_saida>]`: Executar uma varredura Nmap.
 
-## Consequences
-- Significantly simplified the developer experience, making commands shorter and easier to remember.
-- Provided a centralized and consistent interface for managing the development environment.
-- Improved overall usability for terminal-first developers.
+## Consequências
+- Simplificou significativamente a experiência do desenvolvedor, tornando os comandos mais curtos e fáceis de lembrar.
+- Forneceu uma interface centralizada e consistente para gerenciar o ambiente de desenvolvimento.
+- Melhorou a usabilidade geral para desenvolvedores que priorizam o terminal.

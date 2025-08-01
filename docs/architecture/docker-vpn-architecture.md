@@ -1,31 +1,31 @@
-# Docker and VPN Architecture
+# Arquitetura Docker e VPN
 
-This document details the architecture of the Docker environment and the VPN connection within the HTB-Challenge-Toolkit.
+Este documento detalha a arquitetura do ambiente Docker e a conexão VPN dentro do HTB-Challenge-Toolkit.
 
-## 1. Docker Environment Overview
+## 1. Visão Geral do Ambiente Docker
 
-The HTB-Challenge-Toolkit leverages Docker to provide a consistent and isolated penetration testing environment.
+O HTB-Challenge-Toolkit utiliza o Docker para fornecer um ambiente de teste de penetração consistente e isolado.
 
--   **`docker/Dockerfile`**: This file defines the `pentest-env` Docker image. It's based on `mcr.microsoft.com/vscode/devcontainers/base:debian`, ensuring a familiar Debian-based environment. Essential tools like `openvpn`, `nmap`, `procps`, `net-tools`, and `iputils-ping` are installed here. The `connect_vpn.sh` script is copied into the image, making it available within the container.
+-   **`docker/Dockerfile`**: Este arquivo define a imagem Docker `pentest-env`. É baseada em `mcr.microsoft.com/vscode/devcontainers/base:debian`, garantindo um ambiente familiar baseado em Debian. Ferramentas essenciais como `openvpn`, `nmap`, `procps`, `net-tools` e `iputils-ping` são instaladas aqui. O script `connect_vpn.sh` é copiado para a imagem, tornando-o disponível dentro do contêiner.
 
--   **`docker/docker-compose.yml`**: This file orchestrates the Docker services. It defines a single service, `pentest-env`, which uses the image built from the `Dockerfile`.
-    -   **Volume Mount (`..:/workspace:cached`)**: This critical configuration mounts the entire project root directory from the host machine into the `/workspace` directory inside the container. This ensures that all project files, including challenge writeups, `.ovpn` files, and scan results, are directly accessible and synchronized between the host and the container.
-    -   **Network**: The container operates within a Docker network, allowing it to communicate with the host and, once the VPN is established, with external Hack The Box machines.
+-   **`docker/docker-compose.yml`**: Este arquivo orquestra os serviços Docker. Ele define um único serviço, `pentest-env`, que usa a imagem construída a partir do `Dockerfile`.
+    -   **Montagem de Volume (`..:/workspace:cached`)**: Esta configuração crítica monta todo o diretório raiz do projeto da máquina host no diretório `/workspace` dentro do contêiner. Isso garante que todos os arquivos do projeto, incluindo writeups de desafios, arquivos `.ovpn` e resultados de varredura, estejam diretamente acessíveis e sincronizados entre o host e o contêiner.
+    -   **Rede**: O contêiner opera dentro de uma rede Docker, permitindo que ele se comunique com o host e, uma vez que a VPN seja estabelecida, com máquinas externas do Hack The Box.
 
-## 2. VPN Connection Flow
+## 2. Fluxo de Conexão VPN
 
-The VPN connection is established manually by the user, providing explicit control over the process.
+A conexão VPN é estabelecida manualmente pelo usuário, proporcionando controle explícito sobre o processo.
 
-1.  **Initiation**: The user executes the `connect_vpn.sh` script from within the `pentest-env` container. This can be done directly from the container's shell (if using a Dev Container) or via `docker exec` from the host terminal (often simplified by `make vpn-global` or `make vpn-challenge`).
-2.  **`.ovpn` File Location**: The `connect_vpn.sh` script intelligently locates the `.ovpn` configuration file based on a priority order:
-    *   An explicit path provided as an argument (e.g., `challenges/my_challenge/my_challenge.ovpn`).
-    *   If no argument, it defaults to `/workspace/global.ovpn` for a general VPN connection.
-3.  **OpenVPN Client**: The script then uses the `openvpn` client within the container to establish the connection to the Hack The Box VPN server using the specified `.ovpn` file.
-4.  **Network Routing**: Once connected, the container's network routing is updated to direct traffic for the VPN network (e.g., 10.10.10.0/24) through the VPN tunnel.
+1.  **Iniciação**: O usuário executa o script `connect_vpn.sh` de dentro do contêiner `pentest-env`. Isso pode ser feito diretamente do shell do contêiner (se estiver usando um Dev Container) ou via `docker exec` do terminal do host (muitas vezes simplificado por `make vpn-global` ou `make vpn-challenge`).
+2.  **Localização do Arquivo `.ovpn`**: O script `connect_vpn.sh` localiza inteligentemente o arquivo de configuração `.ovpn` com base em uma ordem de prioridade:
+    *   Um caminho explícito fornecido como argumento (ex: `challenges/my_challenge/my_challenge.ovpn`).
+    *   Se nenhum argumento for fornecido, ele assume `/workspace/global.ovpn` para uma conexão VPN geral.
+3.  **Cliente OpenVPN**: O script então usa o cliente `openvpn` dentro do contêiner para estabelecer a conexão com o servidor VPN do Hack The Box usando o arquivo `.ovpn` especificado.
+4.  **Roteamento de Rede**: Uma vez conectado, o roteamento de rede do contêiner é atualizado para direcionar o tráfego para a rede VPN (ex: 10.10.10.0/24) através do túnel VPN.
 
-### VPN Connection Diagram
+### Diagrama de Conexão VPN
 
-#### Simplified Diagram
+#### Diagrama Simplificado
 
 ```mermaid
 architecture-beta
@@ -62,7 +62,7 @@ architecture-beta
     vpn_server:R -- L:target
 ```
 
-#### Detailed Diagram
+#### Diagrama Detalhado
 
 ```mermaid
 graph TD
@@ -114,25 +114,25 @@ graph TD
     style J fill:#e0e0e0,stroke:#333,stroke-width:2px
 ```
 
-## 3. Volume Mounts and File Access
+## 3. Montagens de Volume e Acesso a Arquivos
 
-The core of the seamless integration between the host and the container is the volume mount configured in `docker-compose.yml`: `..:/workspace:cached`.
+O cerne da integração perfeita entre o host e o contêiner é a montagem de volume configurada em `docker-compose.yml`: `..:/workspace:cached`.
 
--   **Host Side (`..`)**: This refers to the parent directory of the `docker/` folder, which is the project root (`/home/aretw0/htb/cap/`).
--   **Container Side (`/workspace`)**: This is the directory inside the `pentest-env` container where the host's project root is mounted.
--   **`cached` option**: This optimizes performance by caching changes, which is beneficial for frequently accessed files.
+-   **Lado do Host (`..`)**: Isso se refere ao diretório pai da pasta `docker/`, que é a raiz do projeto (`/home/aretw0/htb/cap/`).
+-   **Lado do Contêiner (`/workspace`)**: Este é o diretório dentro do contêiner `pentest-env` onde a raiz do projeto do host é montada.
+-   **Opção `cached`**: Isso otimiza o desempenho armazenando em cache as alterações, o que é benéfico para arquivos acessados com frequência.
 
-This setup ensures that:
--   Any `.ovpn` files (e.g., `global.ovpn`, `challenges/cap/cap.ovpn`) placed in the project root or its subdirectories on the host are immediately available inside the container at `/workspace/<path_to_file>`.
--   Scan results generated by `nmap_scan.sh` (which defaults to `scans/` or a specified path relative to `/workspace`) are written directly to the host's filesystem, making them persistent and easily accessible outside the container.
--   All other project files, including `WRITEUP.md` templates and challenge-specific notes, are synchronized.
+Esta configuração garante que:
+-   Quaisquer arquivos `.ovpn` (ex: `global.ovpn`, `challenges/cap/cap.ovpn`) colocados na raiz do projeto ou em seus subdiretórios no host estejam imediatamente disponíveis dentro do contêiner em `/workspace/<caminho_do_arquivo>`.
+-   Os resultados de varredura gerados por `nmap_scan.sh` (que assume `scans/` por padrão ou um caminho especificado em relação a `/workspace`) sejam gravados diretamente no sistema de arquivos do host, tornando-os persistentes e facilmente acessíveis fora do contêiner.
+-   Todos os outros arquivos do projeto, incluindo modelos `WRITEUP.md` e notas específicas do desafio, sejam sincronizados.
 
-## 4. Tooling and Script Execution
+## 4. Ferramentas e Execução de Scripts
 
-All primary penetration testing tools (like Nmap) and custom utility scripts (`connect_vpn.sh`, `nmap_scan.sh`) are designed to be executed from within the `pentest-env` container.
+Todas as ferramentas primárias de teste de penetração (como Nmap) e scripts utilitários personalizados (`connect_vpn.sh`, `nmap_scan.sh`) são projetados para serem executados de dentro do contêiner `pentest-env`.
 
--   **Direct Execution (inside Dev Container)**: If working within a VS Code Dev Container, the user is already in the container's shell. Scripts can be executed directly by their path, e.g., `/workspace/tools/nmap_scan.sh <IP_ADDRESS>`.
--   **Via `docker exec` (from Host Terminal)**: For users working from their host terminal, commands are typically run using `docker exec -it docker_pentest-env_1 <command>`.
--   **Via `Makefile` (from Host Terminal)**: The `Makefile` simplifies these `docker exec` commands into convenient `make` targets (e.g., `make nmap-scan IP=...`). The `Makefile` handles the `docker exec` part, abstracting it away from the user.
+-   **Execução Direta (dentro do Dev Container)**: Se estiver trabalhando em um VS Code Dev Container, o usuário já estará no shell do contêiner. Os scripts podem ser executados diretamente pelo seu caminho, ex: `/workspace/tools/nmap_scan.sh <ENDEREÇO_IP>`.
+-   **Via `docker exec` (do Terminal do Host)**: Para usuários que trabalham a partir do terminal do host, os comandos são tipicamente executados usando `docker exec -it docker_pentest-env_1 <comando>`.
+-   **Via `Makefile` (do Terminal do Host)**: O `Makefile` simplifica esses comandos `docker exec` em alvos `make` convenientes (ex: `make nmap-scan IP=...`). O `Makefile` lida com a parte `docker exec`, abstraindo-a do usuário.
 
-This approach ensures that all operations are performed in the consistent and pre-configured environment, avoiding local machine dependency issues.
+Esta abordagem garante que todas as operações sejam realizadas no ambiente consistente e pré-configurado, evitando problemas de dependência da máquina local.

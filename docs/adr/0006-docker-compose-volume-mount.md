@@ -1,17 +1,17 @@
-# 0006 - Docker Compose Volume Mount Correction
+# 0006 - Correção da Montagem de Volume do Docker Compose
 
 ## Status
-Accepted
+Aceito
 
-## Context
-During terminal environment testing, it was identified that `global.ovpn` was not being found inside the container, despite being present in the project root on the host. Debugging revealed that the volume mount in `docker-compose.yml` (`- .:/workspace:cached`) was mounting the `docker/` folder itself to `/workspace` inside the container, instead of the project root. Additionally, the `env_file: .env` directive in `docker-compose.yml` was causing issues by looking for `.env` in the `docker/` directory instead of the project root.
+## Contexto
+Durante os testes do ambiente de terminal, foi identificado que `global.ovpn` não estava sendo encontrado dentro do contêiner, apesar de estar presente na raiz do projeto no host. A depuração revelou que a montagem de volume em `docker-compose.yml` (`- .:/workspace:cached`) estava montando a própria pasta `docker/` para `/workspace` dentro do contêiner, em vez da raiz do projeto. Além disso, a diretiva `env_file: .env` em `docker-compose.yml` estava causando problemas ao procurar o `.env` no diretório `docker/` em vez da raiz do projeto.
 
-## Decision
-- Changed the volume mount in `docker/docker-compose.yml` from `- .:/workspace:cached` to `- ..:/workspace:cached`, ensuring the project root is correctly mounted to `/workspace`.
-- Removed the `env_file: .env` line from `docker/docker-compose.yml`, allowing Docker Compose to use its default behavior of looking for `.env` in the execution directory (project root).
-- Manual verification inside the container (`docker exec -it <container_id> bash` and `ls -l /workspace`) was performed to confirm the presence of expected files.
+## Decisão
+- Alterada a montagem de volume em `docker/docker-compose.yml` de `- .:/workspace:cached` para `- ..:/workspace:cached`, garantindo que a raiz do projeto seja montada corretamente em `/workspace`.
+- Removida a linha `env_file: .env` de `docker/docker-compose.yml`, permitindo que o Docker Compose use seu comportamento padrão de procurar o `.env` no diretório de execução (raiz do projeto).
+- A verificação manual dentro do contêiner (`docker exec -it <container_id> bash` e `ls -l /workspace`) foi realizada para confirmar a presença dos arquivos esperados.
 
-## Consequences
-- Corrected file access within the container, making all project files accessible at `/workspace`.
-- Simplified environment variable loading by relying on Docker Compose's default `.env` handling.
-- Ensured consistent behavior across different development environments.
+## Consequências
+- Acesso correto aos arquivos dentro do contêiner, tornando todos os arquivos do projeto acessíveis em `/workspace`.
+- Carregamento simplificado de variáveis de ambiente, contando com o tratamento padrão de `.env` do Docker Compose.
+- Comportamento consistente garantido em diferentes ambientes de desenvolvimento.
