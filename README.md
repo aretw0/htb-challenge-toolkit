@@ -31,7 +31,24 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     -   **Erro:** Se nenhum dos arquivos `.ovpn` for encontrado nos locais esperados, a conexão VPN não será iniciada e o contêiner pode falhar ao iniciar ou exibir um erro.
 3.  **Inicie o Ambiente de Desenvolvimento:**
     - **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme.
-    - **Para usuários de Terminal (Docker Compose):** Navegue até a pasta `docker/` e execute `docker-compose up -d`. Para entrar no shell do contêiner, use `docker-compose exec pentest-env bash`.
+    - **Para usuários de Terminal (Docker Compose):**
+        - **Iniciar o ambiente:** Na raiz do projeto, execute:
+            ```bash
+            docker-compose -f docker/docker-compose.yml up -d
+            ```
+            Isso construirá (se necessário) e iniciará o contêiner em segundo plano.
+        - **Acessar o shell do contêiner:**
+            ```bash
+            docker exec -it docker_pentest-env_1 bash
+            ```
+        - **Parar o ambiente:** Para parar os serviços sem remover os contêineres:
+            ```bash
+            docker-compose -f docker/docker-compose.yml stop
+            ```
+        - **Parar e remover o ambiente (limpeza completa):** Para parar os serviços, remover os contêineres, redes e volumes anônimos (útil para um "recomeço limpo" ou após depuração):
+            ```bash
+            docker-compose -f docker/docker-compose.yml down --volumes --remove-orphans
+            ```
 4.  **Crie um Novo Desafio:**
     Use o script `bin/create_challenge.sh` para gerar a estrutura de pastas para um novo desafio:
     ```bash

@@ -56,6 +56,12 @@ Este documento registra a evolução do projeto HTB-Challenge-Toolkit e a colabo
             3.  `global.ovpn`: Arquivo VPN global na raiz do projeto (fallback).
         - Remoção da configuração explícita de `OVPN_CONFIG_FILE` de `.devcontainer/devcontainer.json`, confiando na leitura automática de `.env` pelo Dev Container.
         - Atualização de `README.md`, `GEMINI.md` e `.env.example` para documentar claramente a nova cadeia de prioridade e as formas de definir `OVPN_CONFIG_FILE` e `CHALLENGE_NAME` (via `.env` ou linha de comando).
+- **Correção do Volume Mount no Docker Compose:**
+    - **Problema:** Durante os testes do ambiente de terminal, foi identificado que o `global.ovpn` não estava sendo encontrado dentro do contêiner, apesar de estar presente na raiz do projeto no host. A depuração revelou que o volume mount em `docker-compose.yml` (`- .:/workspace:cached`) estava montando a própria pasta `docker/` para `/workspace` dentro do contêiner, em vez da raiz do projeto. Além disso, a diretiva `env_file: .env` em `docker-compose.yml` estava causando problemas ao procurar o `.env` no diretório `docker/` em vez da raiz do projeto.
+    - **Solução Implementada:**
+        - Alteração do volume mount em `docker/docker-compose.yml` de `- .:/workspace:cached` para `- ..:/workspace:cached`, garantindo que a raiz do projeto seja montada corretamente em `/workspace`.
+        - Remoção da linha `env_file: .env` de `docker/docker-compose.yml`, permitindo que o Docker Compose utilize seu comportamento padrão de buscar o `.env` na raiz do diretório de execução.
+        - Verificação manual dentro do contêiner (`docker exec -it <container_id> bash` e `ls -l /workspace`) para confirmar a presença dos arquivos esperados.
 
 ## 6. Próximos Passos
 

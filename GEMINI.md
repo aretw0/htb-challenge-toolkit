@@ -23,7 +23,11 @@ Compreensão da organização do repositório para localização de arquivos e c
 
 ## Ambiente de Desenvolvimento
 
-O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN é iniciada automaticamente ao subir o contêiner, gerenciada pelo script `docker/start_vpn.sh`, que agora prioriza arquivos `.ovpn` na seguinte ordem: `OVPN_CONFIG_FILE` (se definido), depois arquivos específicos do desafio (definidos via `CHALLENGE_NAME` em um arquivo `.env` na raiz do projeto), e por fim um `global.ovpn` na raiz do projeto.
+O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN é iniciada automaticamente ao subir o contêiner, gerenciada pelo script `docker/start_vpn.sh`. A configuração da VPN segue a ordem de prioridade: `OVPN_CONFIG_FILE` (se definido), depois arquivos específicos do desafio (definidos via `CHALLENGE_NAME` em um arquivo `.env` na raiz do projeto), e por fim um `global.ovpn` na raiz do projeto.
+
+**Detalhes da Configuração Docker Compose:**
+- O `docker-compose.yml` monta a raiz do projeto (`..`) para `/workspace` dentro do contêiner, garantindo que todos os arquivos do projeto estejam acessíveis.
+- O Docker Compose automaticamente carrega variáveis de ambiente de um arquivo `.env` localizado na raiz do projeto (diretório de execução do `docker-compose`), sem a necessidade de uma diretiva `env_file` explícita no `docker-compose.yml`.
 
 ## Fluxo de Trabalho Comum
 
