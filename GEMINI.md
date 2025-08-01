@@ -6,6 +6,7 @@ Este arquivo contém diretrizes e contexto essenciais para o Gemini sobre este p
 
 *   **Commits Atômicos:** Registrar progresso com commits claros e descritivos, seguindo a convenção Conventional Commits (ex: `feat:`, `fix:`, `refactor:`, `chore:`).
 *   **Autodocumentação:** Manter o repositório autodocumentado através de commits e estrutura de arquivos.
+*   **Neutralidade de Ambiente:** Evitar a inclusão de informações específicas do ambiente local do desenvolvedor (nomes de usuário, caminhos absolutos, etc.) em arquivos versionados. Exceções são exemplos genéricos em documentação (ex: `/foo/bar`).
 *   **Prioridade de Ferramentas:** Sempre que possível, utilize os scripts e ferramentas existentes no repositório para realizar tarefas.
 
 ## Estrutura do Projeto

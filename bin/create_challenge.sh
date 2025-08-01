@@ -32,7 +32,6 @@ cp "$WRITEUP_TEMPLATE" "${CHALLENGE_DIR}/WRITEUP.md"
 DATE_NOW=$(date +%Y-%m-%d)
 sed -i "s/\[NOME_DA_MAQUINA\]/${CHALLENGE_NAME}/g" "${CHALLENGE_DIR}/WRITEUP.md"
 sed -i "s/\[NOME_DO_DESAFIO\]/${CHALLENGE_NAME}/g" "${CHALLENGE_DIR}/WRITEUP.md"
-sed -i "s/\[SEU_NOME\]/aretw0/g" "${CHALLENGE_DIR}/WRITEUP.md" # Pode ser alterado para uma variável de ambiente ou input
 sed -i "s/\[DATA_ATUAL\]/${DATE_NOW}/g" "${CHALLENGE_DIR}/WRITEUP.md"
 
 # Remove placeholders específicos de máquina, se existirem
