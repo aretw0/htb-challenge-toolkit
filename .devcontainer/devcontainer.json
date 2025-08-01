@@ -1,0 +1,21 @@
+{
+	"name": "Hack The Box - Pentest Environment",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"runArgs": [
+		"--cap-add=NET_ADMIN",
+		"--device=/dev/net/tun",
+		"--security-opt",
+		"label:disable",
+		"-v",
+		"${localWorkspaceFolder}/vpn:/vpn:ro"
+	],
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"extensions": []
+		}
+	},
+	"postCreateCommand": "sudo chown vscode /vpn"
+}
