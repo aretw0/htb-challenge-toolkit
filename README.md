@@ -81,9 +81,13 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
 - `bin/`: Contém scripts para gerenciar o repositório (ex: `create_challenge.sh`).
 - `docker/`: Contém o `Dockerfile` e o `docker-compose.yml` para o ambiente Docker.
 - `challenges/`: Contém as pastas para cada desafio HTB, cada uma com seu `WRITEUP.md` e artefatos específicos. Cada pasta de desafio também contém uma subpasta `scans/` para os resultados dos scans.
+- `docs/`: Contém documentação detalhada sobre a arquitetura do projeto e os registros de decisões arquiteturais (ADRs).
+    - `docs/architecture/`: Diagramas e explicações sobre a arquitetura Docker e VPN.
+    - `docs/adr/`: Registros de Decisões Arquiteturais (ADRs) que documentam o "porquê" das principais escolhas de design.
 - `templates/`: Contém templates para novos desafios (ex: `WRITEUP_TEMPLATE.md`).
 - `tools/`: Contém scripts utilitários de pentest (ex: `nmap_scan.sh`).
 - `GEMINI.md`: Diretrizes de colaboração para o Gemini (este assistente).
+- `JOURNAL.md`: Um sumário das decisões de desenvolvimento e links para os ADRs.
 - `README.md`: Este arquivo.
 
 ## Contribuição

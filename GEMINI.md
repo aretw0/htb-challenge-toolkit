@@ -17,9 +17,11 @@ Compreensão da organização do repositório para localização de arquivos e c
 *   `bin/`: Scripts de gerenciamento do repositório (ex: `create_challenge.sh`).
 *   `docker/`: `Dockerfile` e `docker-compose.yml` para o ambiente Docker.
 *   `challenges/`: Pastas para cada desafio HTB, contendo `WRITEUP.md` e artefatos. Cada pasta de desafio também contém uma subpasta `scans/` para os resultados dos scans.
+*   `docs/`: Contém documentação detalhada sobre a arquitetura do projeto e os registros de decisões arquiteturais (ADRs).
+    *   `docs/architecture/`: Diagramas e explicações sobre a arquitetura Docker e VPN.
+    *   `docs/adr/`: Registros de Decisões Arquiteturais (ADRs) que documentam o "porquê" das principais escolhas de design.
 *   `templates/`: Templates para novos arquivos (ex: `WRITEUP_TEMPLATE.md`).
 *   `tools/`: Contém scripts utilitários de pentest (ex: `nmap_scan.sh`). Os resultados dos scans são salvos automaticamente na pasta `scans/` do desafio atual.
-*   `.env.example`: Exemplo de configuração de variáveis de ambiente.
 
 ## Ambiente de Desenvolvimento
 
