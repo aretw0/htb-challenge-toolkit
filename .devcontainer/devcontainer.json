@@ -10,9 +10,6 @@
 		"label:disable",
 		"--privileged"
 	],
-	"containerEnv": {
-		"OVPN_CONFIG_FILE": "${localEnv:OVPN_CONFIG_FILE}"
-	},
 	"customizations": {
 		"vscode": {
 			"settings": {},

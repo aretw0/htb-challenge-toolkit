@@ -16,7 +16,6 @@ Compreensão da organização do repositório para localização de arquivos e c
 *   `.devcontainer/`: Configurações do Dev Container (VS Code).
 *   `bin/`: Scripts de gerenciamento do repositório (ex: `create_challenge.sh`).
 *   `docker/`: `Dockerfile` e `docker-compose.yml` para o ambiente Docker.
-*   `vpn/`: Arquivos `.ovpn` (ignorados pelo Git).
 *   `challenges/`: Pastas para cada desafio HTB, contendo `WRITEUP.md` e artefatos. Cada pasta de desafio também contém uma subpasta `scans/` para os resultados dos scans.
 *   `templates/`: Templates para novos arquivos (ex: `WRITEUP_TEMPLATE.md`).
 *   `tools/`: Contém scripts utilitários de pentest (ex: `nmap_scan.sh`). Os resultados dos scans são salvos automaticamente na pasta `scans/` do desafio atual.
@@ -24,7 +23,7 @@ Compreensão da organização do repositório para localização de arquivos e c
 
 ## Ambiente de Desenvolvimento
 
-O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN é iniciada automaticamente ao subir o contêiner, gerenciada pelo script `docker/start_vpn.sh`.
+O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN é iniciada automaticamente ao subir o contêiner, gerenciada pelo script `docker/start_vpn.sh`, que agora prioriza arquivos `.ovpn` específicos do desafio ou um `global.ovpn` na raiz do projeto, sem a necessidade de variáveis de ambiente adicionais.
 
 ## Fluxo de Trabalho Comum
 
