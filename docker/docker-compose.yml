@@ -6,14 +6,12 @@ services:
       context: ..
       dockerfile: ./docker/Dockerfile
     volumes:
-      - .:/workspace:cached # Monta o diretório do projeto dentro do contêiner
+      - ..:/workspace:cached # Monta o diretório do projeto (pai de docker/) dentro do contêiner
     cap_add:
       - NET_ADMIN
     devices:
       - /dev/net/tun
     privileged: true # Necessário para OpenVPN em alguns casos
     working_dir: /workspace
-    env_file:
-      - .env # Carrega variáveis de ambiente do arquivo .env
     command: /usr/local/bin/start_vpn.sh # Chama o script para iniciar a VPN
 
