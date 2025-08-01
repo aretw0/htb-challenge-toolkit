@@ -29,22 +29,22 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     *   **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme.
     *   **Para usuários de Terminal (Docker Compose):** Navegue até a pasta `docker/` e execute `docker-compose up -d`. Para entrar no shell do contêiner, use `docker-compose exec pentest-env bash`.
 4.  **Crie um Novo Desafio:**
-    Use o script `create_challenge.sh` para gerar a estrutura de pastas para um novo desafio:
+    Use o script `bin/create_challenge.sh` para gerar a estrutura de pastas para um novo desafio:
     ```bash
-    ./create_challenge.sh <nome_do_desafio>
+    ./bin/create_challenge.sh <nome_do_desafio>
     ```
-    Exemplo: `./create_challenge.sh new_machine`
+    Exemplo: `./bin/create_challenge.sh new_machine`
     Isso criará `challenges/new_machine/WRITEUP.md` e outras pastas se necessário.
 
 ## Estrutura do Projeto
 
 *   `.devcontainer/`: Configurações para o Dev Container do VS Code.
+*   `bin/`: Contém scripts para gerenciar o repositório (ex: `create_challenge.sh`).
 *   `docker/`: Contém o `Dockerfile` e o `docker-compose.yml` para o ambiente Docker.
 *   `vpn/`: Pasta para seus arquivos de configuração `.ovpn` (ignorada pelo Git).
 *   `challenges/`: Contém as pastas para cada desafio HTB, cada uma com seu `WRITEUP.md` e artefatos específicos.
 *   `templates/`: Contém templates para novos desafios (ex: `WRITEUP_TEMPLATE.md`).
-*   `nmap_scan.sh`: Script utilitário para varredura Nmap.
-*   `create_challenge.sh`: Script para automatizar a criação de novas estruturas de desafio.
+*   `tools/`: Contém scripts utilitários de pentest (ex: `nmap_scan.sh`).
 *   `GEMINI.md`: Diretrizes de colaboração para o Gemini (este assistente).
 *   `README.md`: Este arquivo.
 
