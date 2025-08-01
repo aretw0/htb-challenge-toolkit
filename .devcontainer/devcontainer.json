@@ -13,7 +13,12 @@
 	"customizations": {
 		"vscode": {
 			"settings": {},
-			"extensions": []
+			"extensions": [
+				"ms-vscode.makefile-tools",
+				"google.geminicodeassist",
+				"MermaidChart.vscode-mermaid-chart",
+				"DavidAnson.vscode-markdownlint"
+			]
 		}
 	}
 }
