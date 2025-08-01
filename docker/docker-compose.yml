@@ -13,5 +13,7 @@ services:
       - /dev/net/tun
     privileged: true # Necessário para OpenVPN em alguns casos
     working_dir: /workspace
+    environment:
+      - CHALLENGE_NAME=${CHALLENGE_NAME}
     command: /usr/local/bin/start_vpn.sh # Chama o script para iniciar a VPN
 
