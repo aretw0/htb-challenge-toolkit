@@ -25,8 +25,46 @@ The VPN connection is established manually by the user, providing explicit contr
 
 ### VPN Connection Diagram
 
+#### Simplified Diagram
+
 ```mermaid
-%%{init: {'theme': 'neutral', 'flowchart': {'curve': 'linear'}, 'themeVariables': {'primaryColor': '#f0f0f0', 'primaryTextColor': '#333', 'lineColor': '#666', 'secondaryColor': '#fff', 'tertiaryColor': '#eee', 'nodeBorder': '#ccc', 'clusterBkg': '#f8f8f8', 'clusterBorder': '#bbb'}}}%%
+architecture-beta
+    group host(mdi:laptop)[Host Machine]
+    group docker(mdi:docker)[Docker Container pentest_env] in host
+    group htb(mdi:cloud)[Hack The Box Network]
+
+    service terminal(mdi:terminal)[Local Terminal] in host
+    service docker_daemon(mdi:server)[Docker Daemon] in host
+    service project_root(mdi:folder-file)[Project Root] in host
+
+    service shell(mdi:terminal)[Container Shell] in docker
+    service connect_vpn(mdi:script)[Connect VPN] in docker
+    service openvpn(mdi:server)[OpenVPN Client] in docker
+    service nmap(mdi:script)[Nmap Scan] in docker
+    service workspace(mdi:folder-file)[workspace] in docker
+
+    service vpn_server(mdi:vpn)[HTB VPN Server] in htb
+    service target(mdi:server)[Target Machine] in htb
+
+    terminal:R -- L:docker_daemon
+    docker_daemon:R -- L:shell
+
+    shell:R -- L:connect_vpn
+    shell:T -- L:nmap
+
+    project_root:R -- L:workspace
+
+    connect_vpn:R -- L:openvpn
+    connect_vpn:B -- T:workspace
+    
+    nmap:R -- L:vpn_server
+    openvpn:R -- L:vpn_server
+    vpn_server:R -- L:target
+```
+
+#### Detailed Diagram
+
+```mermaid
 graph TD
     subgraph Host Machine
         A[Local Terminal]
@@ -34,7 +72,7 @@ graph TD
         C[Project Root]
     end
 
-    subgraph Docker Container (pentest-env)
+    subgraph Docker Container - pentest-env
         D[Container Shell]
         E[connect_vpn.sh]
         F[OpenVPN Client]
@@ -48,12 +86,12 @@ graph TD
     end
 
     A -- "make up / docker-compose up" --> B
-    B -- "Container Creation" --> D
-    C -- "Volume Mount (..:/workspace)" --> H
+    B ----> D
+    C ----> H
 
-    A -- "make shell" --> D
-    A -- "make vpn-global / vpn-challenge" --> D
-    A -- "make nmap-scan" --> D
+    A -- "make shell" --> B
+    A -- "make vpn-global / vpn-challenge" --> B
+    A -- "make nmap-scan" --> B
 
     D -- "Execute" --> E
     D -- "Execute" --> G
