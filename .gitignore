@@ -1,2 +1,5 @@
 # Ignora arquivos de configuração da VPN
-/vpn/
+/vpn/*.ovpn
+
+# Ignora arquivos de ambiente
+.env
