@@ -21,14 +21,21 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     git clone <URL_DO_SEU_REPOSITORIO>
     cd <nome_do_repositorio>
     ```
-2.  **Configure sua VPN:**
-    O ambiente tentará automaticamente encontrar e usar seu arquivo `.ovpn` na seguinte ordem de prioridade:
-    -   **Prioridade 1: `OVPN_CONFIG_FILE` (Caminho Explícito):** Se a variável de ambiente `OVPN_CONFIG_FILE` estiver definida (ex: `OVPN_CONFIG_FILE=challenges/cap/cap.ovpn`), o ambiente tentará usar o arquivo `.ovpn` especificado por este caminho (relativo à raiz do projeto).
-        -   **Como definir `OVPN_CONFIG_FILE`:** Crie um arquivo `.env` na raiz do projeto (copiando de `.env.example`) e adicione `OVPN_CONFIG_FILE=caminho/para/seu/arquivo.ovpn`.
-    -   **Prioridade 2: `CHALLENGE_NAME` (Desafio Específico):** Se `OVPN_CONFIG_FILE` não estiver definido ou o arquivo especificado não for encontrado, e a variável de ambiente `CHALLENGE_NAME` estiver definida (ex: `CHALLENGE_NAME=cap`), o ambiente procurará por `challenges/<CHALLENGE_NAME>/<CHALLENGE_NAME>.ovpn`. Certifique-se de que o arquivo `.ovpn` tenha o mesmo nome da pasta do desafio.
-        -   **Como definir `CHALLENGE_NAME`:** Você pode definir a variável diretamente na linha de comando (ex: `CHALLENGE_NAME=cap docker-compose up -d`) ou, para persistência, criar um arquivo `.env` na raiz do projeto (copiando de `.env.example`) e adicionar `CHALLENGE_NAME=seu_desafio`.
-    -   **Prioridade 3: `global.ovpn` (Fallback Global):** Se nenhuma das opções acima resultar em um arquivo `.ovpn` válido, o ambiente procurará por `global.ovpn` na raiz do repositório.
-    -   **Erro:** Se nenhum dos arquivos `.ovpn` for encontrado nos locais esperados, a conexão VPN não será iniciada e o contêiner pode falhar ao iniciar ou exibir um erro.
+2.  **Conecte-se à VPN (Manual):**
+    Após iniciar o ambiente, você precisará iniciar a conexão VPN manualmente dentro do contêiner. O script `connect_vpn.sh` está disponível para isso.
+    -   **Conectar com `global.ovpn` (padrão):**
+        ```bash
+        docker exec -it docker_pentest-env_1 /usr/local/bin/connect_vpn.sh
+        ```
+    -   **Conectar com um arquivo `.ovpn` específico:**
+        ```bash
+        docker exec -it docker_pentest-env_1 /usr/local/bin/connect_vpn.sh challenges/seu_desafio/seu_desafio.ovpn
+        ```
+        Substitua `seu_desafio/seu_desafio.ovpn` pelo caminho real do seu arquivo `.ovpn` relativo à raiz do projeto.
+    -   **Verificar a conexão:** Após executar o comando, você pode verificar os logs do contêiner para confirmar a conexão:
+        ```bash
+        docker-compose -f docker/docker-compose.yml logs pentest-env
+        ```
 3.  **Inicie o Ambiente de Desenvolvimento:**
     - **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme.
     - **Para usuários de Terminal (Docker Compose):**
@@ -57,11 +64,16 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
     Exemplo: `./bin/create_challenge.sh path_of_glory` (para um Path) ou `./bin/create_challenge.sh cap` (para uma máquina individual).
     Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`.
 5.  **Execute Scans:**
-    Navegue até o diretório do desafio (ex: `cd challenges/cap/`) e execute o script de scan:
+    Após conectar a VPN, você pode executar scans Nmap. O script `nmap_scan.sh` salvará os resultados na pasta `scans/` na raiz do projeto por padrão, ou em uma pasta específica se você usar a opção `-o`.
     ```bash
-    ../../tools/nmap_scan.sh <IP_ADDRESS>
+    docker exec -it docker_pentest-env_1 /workspace/tools/nmap_scan.sh <IP_ADDRESS>
     ```
-    Os resultados serão salvos automaticamente na pasta `scans/` dentro do diretório do desafio.
+    Exemplo: `docker exec -it docker_pentest-env_1 /workspace/tools/nmap_scan.sh 10.10.10.245`
+    
+    Para salvar os resultados em uma pasta de desafio específica (ex: `challenges/cap/scans/`):
+    ```bash
+    docker exec -it docker_pentest-env_1 /workspace/tools/nmap_scan.sh -o challenges/cap/scans <IP_ADDRESS>
+    ```
 
 ## Estrutura do Projeto
 

@@ -15,6 +15,5 @@
 			"settings": {},
 			"extensions": []
 		}
-	},
-	"postStartCommand": "/usr/local/bin/start_vpn.sh"
+	}
 }

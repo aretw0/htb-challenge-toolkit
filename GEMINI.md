@@ -23,7 +23,7 @@ Compreensão da organização do repositório para localização de arquivos e c
 
 ## Ambiente de Desenvolvimento
 
-O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN é iniciada automaticamente ao subir o contêiner, gerenciada pelo script `docker/start_vpn.sh`. A configuração da VPN segue a ordem de prioridade: `OVPN_CONFIG_FILE` (se definido), depois arquivos específicos do desafio (definidos via `CHALLENGE_NAME` em um arquivo `.env` na raiz do projeto), e por fim um `global.ovpn` na raiz do projeto.
+O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN não é mais iniciada automaticamente ao subir o contêiner. Em vez disso, o desenvolvedor tem controle explícito sobre quando e como iniciar a conexão VPN, executando o script `connect_vpn.sh` manualmente dentro do contêiner.
 
 **Detalhes da Configuração Docker Compose:**
 - O `docker-compose.yml` monta a raiz do projeto (`..`) para `/workspace` dentro do contêiner, garantindo que todos os arquivos do projeto estejam acessíveis.
@@ -32,7 +32,19 @@ O ambiente é isolado via Docker, incluindo `nmap` e `openvpn`. A conexão VPN �
 ## Fluxo de Trabalho Comum
 
 *   **Criação de Desafio:** `bin/create_challenge.sh <nome_do_desafio>` (Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`. O nome do desafio pode ser o nome de uma máquina individual ou de um Path/Desafio com múltiplas máquinas.)
-*   **Execução de Scans:** Navegue até o diretório do desafio (ex: `cd challenges/cap/`) e execute o script de scan: `../../tools/nmap_scan.sh <IP_ADDRESS>`. Os resultados serão salvos automaticamente na pasta `scans/` dentro do diretório do desafio.
+*   **Início do Ambiente:** O `docker-compose` deve ser sempre executado a partir da raiz do projeto.
+    ```bash
+    docker-compose -f docker/docker-compose.yml up -d
+    ```
+*   **Conexão VPN:** Após o ambiente estar em execução, conecte a VPN manualmente.
+    ```bash
+    docker exec -it docker_pentest-env_1 /usr/local/bin/connect_vpn.sh [caminho/do/ovpn]
+    ```
+    (Ex: `/usr/local/bin/connect_vpn.sh` para `global.ovpn`, ou `/usr/local/bin/connect_vpn.sh challenges/cap/cap.ovpn` para um desafio específico).
+*   **Execução de Scans:** Execute scans Nmap diretamente do contêiner. Os resultados serão salvos em `scans/` na raiz do projeto por padrão, ou em uma pasta especificada com `-o`.
+    ```bash
+    docker exec -it docker_pentest-env_1 /workspace/tools/nmap_scan.sh <IP_ADDRESS>
+    ```
 
 ## Convenções
 

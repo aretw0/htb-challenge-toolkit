@@ -11,7 +11,7 @@ OUTPUT_DIR="scans"
 print_usage() {
   echo "Uso: $0 [-s] [-o <output_dir>] <IP_ADDRESS>"
   echo "  -s: Modo silencioso. Não exibe o output na tela, apenas salva no arquivo."
-  echo "  -o <output_dir>: Pasta para salvar o arquivo de resultados. O padrão é a pasta atual."
+  echo "  -o <output_dir>: Pasta para salvar o arquivo de resultados. O padrão é '$OUTPUT_DIR'."
   exit 1
 }
 
@@ -39,11 +39,8 @@ fi
 
 IP_ADDRESS=$1
 
-# Verifica se a pasta de saída existe
-if [ ! -d "$OUTPUT_DIR" ]; then
-  echo "Erro: A pasta de saída '$OUTPUT_DIR' não existe."
-  exit 1
-fi
+# Cria a pasta de saída se ela não existir
+mkdir -p "$OUTPUT_DIR"
 
 # Gera o nome do arquivo de saída com timestamp
 TIMESTAMP=$(date +%Y%m%d%H%M%S)

@@ -63,6 +63,37 @@ Este documento registra a evolução do projeto HTB-Challenge-Toolkit e a colabo
         - Remoção da linha `env_file: .env` de `docker/docker-compose.yml`, permitindo que o Docker Compose utilize seu comportamento padrão de buscar o `.env` na raiz do diretório de execução.
         - Verificação manual dentro do contêiner (`docker exec -it <container_id> bash` e `ls -l /workspace`) para confirmar a presença dos arquivos esperados.
 
-## 6. Próximos Passos
+## 6. Simplificação e Controle Explícito do Ambiente
+
+- **Filosofia:** Migração para um modelo onde o desenvolvedor tem controle explícito sobre cada passo, reduzindo a automação implícita e a dependência de variáveis de ambiente para o funcionamento básico do ambiente.
+- **Remoção da Inicialização Automática da VPN:**
+    - **Problema:** A inicialização automática da VPN no `postStartCommand` do Dev Container e no `command` do `docker-compose.yml` criava complexidade e dependências indesejadas.
+    - **Solução Implementada:**
+        - Remoção de `command: /usr/local/bin/start_vpn.sh` de `docker/docker-compose.yml`.
+        - Remoção de `postStartCommand: /usr/local/bin/start_vpn.sh` de `.devcontainer/devcontainer.json`.
+        - O contêiner agora inicia com seu shell padrão, e a conexão VPN é iniciada manualmente pelo usuário.
+- **Simplificação do Script de Conexão VPN:**
+    - **Problema:** O script `start_vpn.sh` estava sobrecarregado com lógica de prioridade de arquivos `.ovpn` e dependência de variáveis de ambiente.
+    - **Solução Implementada:**
+        - Renomeado `docker/start_vpn.sh` para `docker/connect_vpn.sh`.
+        - Simplificação da lógica de `connect_vpn.sh`: agora aceita o caminho do arquivo `.ovpn` como argumento. Se nenhum argumento for fornecido, ele tenta usar `/workspace/global.ovpn` como padrão.
+        - O script agora é executado manualmente pelo usuário dentro do contêiner (`docker exec -it <container_id> /usr/local/bin/connect_vpn.sh [caminho/do/ovpn]`).
+- **Simplificação do Script de Scan Nmap:**
+    - **Problema:** O script `nmap_scan.sh` tentava inferir o diretório de saída com base em `CHALLENGE_NAME`, adicionando complexidade.
+    - **Solução Implementada:**
+        - Remoção da lógica de detecção de `CHALLENGE_NAME` de `tools/nmap_scan.sh`.
+        - O `OUTPUT_DIR` agora padroniza para `scans/` na raiz do projeto, ou pode ser especificado explicitamente com `-o`.
+        - O script agora cria a pasta de saída (`scans/`) se ela não existir.
+- **Remoção de Criação Implícita de Arquivos:**
+    - **Problema:** O script `bin/create_challenge.sh` criava um arquivo `.ovpn` placeholder, o que ia contra a filosofia de controle explícito.
+    - **Solução Implementada:** Remoção da linha que criava o arquivo `.ovpn` placeholder de `bin/create_challenge.sh`.
+- **Limpeza de Variáveis de Ambiente de Exemplo:**
+    - **Problema:** `.env.example` continha variáveis de ambiente relacionadas à VPN que não são mais usadas para inicialização automática.
+    - **Solução Implementada:** Remoção de `OVPN_CONFIG_FILE` e `CHALLENGE_NAME` de `.env.example`.
+- **Padronização da Execução do Docker Compose:**
+    - **Problema:** A documentação anterior sugeria a execução do `docker-compose` de subdiretórios.
+    - **Solução Implementada:** A documentação agora enfatiza que o `docker-compose` deve ser sempre executado a partir da raiz do projeto.
+
+## 7. Próximos Passos
 
 - Iniciar a fase de Reconhecimento e Enumeração para o desafio "Cap".
