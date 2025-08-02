@@ -16,6 +16,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - **Implicit File Creation:** Removed the automatic creation of placeholder `.ovpn` files from `create_challenge.sh`.
 
+## [0.5.0] - 2025-08-01
+
+### Removed
+- **MCP Server Management via Docker Compose/Makefile:** Eliminated the direct management of the `github-mcp-server` via `docker-compose.yml` and `Makefile` targets (`mcp-up`, `mcp-down`).
+
+### Changed
+- **MCP Server Configuration:** Centralized `github-mcp-server` configuration to `.vscode/mcp.json` (for VS Code) and `~/.gemini/settings.json` (for Gemini CLI).
+- **Documentation:** Updated `docs/adr/0001-environment-and-tooling.md` and `README.md` to reflect the new MCP server management approach.
+
 ## [0.4.0] - 2025-07-28
 
 ### Added
