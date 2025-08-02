@@ -1,10 +1,16 @@
 # HTB-Challenge-Toolkit
 
+<div align="center">
+  <a href="https://github.com/aretw0/htb-challenge-toolkit/generate" target="_blank">
+    <img src="https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge&logo=github" alt="Use this template" />
+  </a>
+</div>
+
 Bem-vindo ao **HTB-Challenge-Toolkit**! Este repositório foi criado para ser sua caixa de ferramentas e diário de bordo no enfrentamento de desafios da plataforma Hack The Box (HTB).
 
 ## Propósito
 
-Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portátil, juntamente com scripts utilitários e uma estrutura de documentação para cada **desafio** da plataforma Hack The Box que você resolver. Embora tenhamos começado com o **desafio** "Cap", este repositório é projetado para ser uma solução de longo prazo para suas jornadas de pentest.
+Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portátil, juntamente com scripts utilitários e uma estrutura de documentação para cada **desafio** da plataforma Hack The Box que você resolver. Este repositório é projetado para ser uma solução de longo prazo para suas jornadas de pentest.
 
 ## Funcionalidades Principais
 
@@ -16,12 +22,15 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
 
 ## Como Começar
 
-1.  **Clone o Repositório:**
+1.  **Use este Template:**
+    Clique no botão `Use this template` no topo desta página para criar seu próprio repositório a partir deste modelo.
+
+2.  **Clone o Repositório:**
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
-    cd <nome_do_repositorio>
+    git clone https://github.com/aretw0/htb-challenge-toolkit.git
+    cd htb-challenge-toolkit
     ```
-2.  **Conecte-se à VPN (Manual):**
+3.  **Conecte-se à VPN (Manual):**
     Após iniciar o ambiente, você precisará iniciar a conexão VPN manualmente dentro do contêiner. Use os comandos `make vpn-global` ou `make vpn-challenge`.
     -   **Conectar com `global.ovpn` (padrão):**
         ```bash
@@ -31,12 +40,12 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
         ```bash
         make vpn-challenge CHALLENGE=seu_desafio
         ```
-        Substitua `seu_desafio` pelo nome do seu desafio (ex: `cap`). Certifique-se de que o arquivo `.ovpn` esteja em `challenges/seu_desafio/seu_desafio.ovpn`.
+        Substitua `seu_desafio` pelo nome do seu desafio. Certifique-se de que o arquivo `.ovpn` esteja em `challenges/seu_desafio/seu_desafio.ovpn`.
     -   **Verificar a conexão:** Após executar o comando, você pode verificar os logs do contêiner para confirmar a conexão:
         ```bash
         docker-compose -f docker/docker-compose.yml logs pentest-env
         ```
-3.  **Inicie o Ambiente de Desenvolvimento:**
+4.  **Inicie o Ambiente de Desenvolvimento:**
     - **Para usuários VS Code:** Abra o projeto no VS Code. Ele deve detectar a configuração do Dev Container e perguntar se você deseja reabri-lo no contêiner. Confirme. Uma vez dentro do Dev Container, você já estará no terminal do contêiner. Você pode usar os comandos `make` para gerenciar o ambiente Docker (como `make down` ou `make clean`), mas para executar scripts dentro do contêiner (como `connect_vpn.sh` ou `nmap_scan.sh`), é mais eficiente executá-los diretamente pelo caminho `/workspace/tools/`.
     - **Para usuários de Terminal (Docker Compose via Makefile):**
         O `Makefile` na raiz do projeto simplifica a interação com o ambiente Docker Compose.
@@ -57,22 +66,22 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
             ```bash
             make clean
             ```
-4.  **Crie um Novo Desafio:**
+5.  **Crie um Novo Desafio:**
     Use o script `bin/create_challenge.sh` para gerar a estrutura de pastas para um novo desafio:
     ```bash
     ./bin/create_challenge.sh <nome_do_desafio>
     ```
-    Exemplo: `./bin/create_challenge.sh path_of_glory` (para um Path) ou `./bin/create_challenge.sh cap` (para uma máquina individual).
+    Exemplo: `./bin/create_challenge.sh path_of_glory` (para um Path) ou `./bin/create_challenge.sh my-machine` (para uma máquina individual).
     Isso criará `challenges/<nome_do_desafio>/WRITEUP.md` e a pasta `challenges/<nome_do_desafio>/scans/`.
-5.  **Execute Scans:**
+6.  **Execute Scans:**
     Após conectar a VPN, você pode executar scans Nmap usando o `Makefile`.
     -   **Scan básico:**
         ```bash
-        make nmap-scan IP=10.10.10.245
+        make nmap-scan IP=<IP_ADDRESS>
         ```
     -   **Scan com diretório de saída específico:**
         ```bash
-        make nmap-scan IP=10.10.10.245 OUTPUT_DIR=challenges/cap/scans
+        make nmap-scan IP=<IP_ADDRESS> OUTPUT_DIR=challenges/<challenge_name>/scans
         ```
 
 ## Estrutura do Projeto
