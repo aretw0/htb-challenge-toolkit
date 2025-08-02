@@ -14,3 +14,10 @@ services:
     privileged: true # Necessário para OpenVPN em alguns casos
     working_dir: /workspace
 
+  github-mcp-server:
+    image: ghcr.io/github/github-mcp-server
+    env_file:
+      - ../.env
+    ports:
+      - "8080:8080"
+

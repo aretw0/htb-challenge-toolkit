@@ -58,3 +58,23 @@ else
 	docker exec -it $(CONTAINER_NAME) /workspace/tools/nmap_scan.sh $(IP)
 endif
 	@echo "Nmap scan initiated. Results will be in the specified output directory or 'scans/'."
+
+# Bring up a specific MCP server
+# Usage: make mcp-up SERVICE=github
+mcp-up:
+ifndef SERVICE
+	$(error SERVICE is not set. Usage: make mcp-up SERVICE=<service_name>)
+endif
+	@echo "Bringing up MCP server for $(SERVICE)..."
+	docker-compose -f $(COMPOSE_FILE) up -d $(SERVICE)-mcp-server
+	@echo "MCP server for $(SERVICE) is up."
+
+# Bring down a specific MCP server
+# Usage: make mcp-down SERVICE=github
+mcp-down:
+ifndef SERVICE
+	$(error SERVICE is not set. Usage: make mcp-down SERVICE=<service_name>)
+endif
+	@echo "Bringing down MCP server for $(SERVICE)..."
+	docker-compose -f $(COMPOSE_FILE) down $(SERVICE)-mcp-server
+	@echo "MCP server for $(SERVICE) is down."

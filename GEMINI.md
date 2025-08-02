@@ -8,6 +8,7 @@ This file contains essential guidelines and context for Gemini regarding this pr
 *   **Self-Documentation:** Maintain the repository self-documented through commits and file structure.
 *   **Environment Neutrality:** Avoid including developer-specific local environment information (usernames, absolute paths, etc.) in versioned files. Exceptions are generic examples in documentation (e.g., `/foo/bar`).
 *   **Tool Prioritization:** Whenever possible, use existing scripts and tools in the repository to perform tasks.
+*   **ADR Management:** Prioritize updating existing Architectural Decision Records (ADRs) over creating new ones. New ADRs should only be created for significant architectural decisions that introduce a new concept or fundamentally change an existing one. Otherwise, integrate new decisions into relevant existing ADRs.
 
 ## Project Structure
 
@@ -74,6 +75,20 @@ When you open the project in a Dev Container, the VS Code terminal is already *i
 *   **Clean Up Environment:**
     ```bash
     make clean
+    ```
+
+### Model Context Protocol (MCP) Server Management
+
+This repository can include a GitHub Model Context Protocol (MCP) server for specific scenarios. To use it, you will need to configure a GitHub Personal Access Token in the `.env` file at the project root. Copy `.env.example` to `.env` and populate the `GITHUB_PERSONAL_ACCESS_TOKEN` variable.
+
+*   **Start the MCP server for a specific service (e.g., GitHub):**
+    ```bash
+    make mcp-up SERVICE=github
+    ```
+
+*   **Stop the MCP server for a specific service (e.g., GitHub):**
+    ```bash
+    make mcp-down SERVICE=github
     ```
 
 ## Conventions
