@@ -3,5 +3,11 @@ challenges/**
 !challenges/.gitkeep
 global.ovpn
 
-# Ignora arquivos de ambiente
+# Local environment files
 .env
+*.ovpn
+
+# Scans
+scans/
+/challenges/*/scans/*
+

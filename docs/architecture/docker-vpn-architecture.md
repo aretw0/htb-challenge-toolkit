@@ -56,7 +56,7 @@ architecture-beta
 
     connect_vpn:R -- L:openvpn
     connect_vpn:B -- T:workspace
-    
+
     nmap:R -- L:vpn_server
     openvpn:R -- L:vpn_server
     vpn_server:R -- L:target

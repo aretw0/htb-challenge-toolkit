@@ -1,6 +1,6 @@
 # Makefile for HTB-Challenge-Toolkit
 
-.PHONY: up down clean shell vpn-global vpn-challenge nmap-scan
+.PHONY: up down clean shell vpn-global vpn-challenge nmap-scan logs
 
 # Variables
 COMPOSE_FILE := docker/docker-compose.yml
@@ -24,15 +24,27 @@ clean:
 	docker-compose -f $(COMPOSE_FILE) down --volumes --remove-orphans
 	@echo "Environment cleaned."
 
+# Rebuild the Docker image and bring up the environment
+rebuild: clean
+	@echo "Rebuilding Docker image..."
+	docker-compose -f $(COMPOSE_FILE) build
+	@echo "Docker image rebuilt. Bringing up the environment..."
+	$(MAKE) up
+
 # Get a bash shell inside the running container
 shell:
 	@echo "Accessing container shell..."
 	docker exec -it $(CONTAINER_NAME) bash
 
+# Display logs for the pentest-env service
+logs:
+	@echo "Displaying logs for pentest-env service..."
+	docker-compose -f $(COMPOSE_FILE) logs pentest-env
+
 # Connect to the global VPN
 vpn-global:
 	@echo "Connecting to global VPN..."
-	docker exec -it $(CONTAINER_NAME) /workspace/tools/connect_vpn.sh
+	docker exec $(CONTAINER_NAME) /workspace/tools/connect_vpn.sh
 	@echo "Check container logs for VPN status: docker-compose -f $(COMPOSE_FILE) logs pentest-env"
 
 # Connect to a challenge-specific VPN
@@ -42,7 +54,7 @@ ifndef CHALLENGE
 	$(error CHALLENGE is not set. Usage: make vpn-challenge CHALLENGE=<challenge_name>)
 endif
 	@echo "Connecting to VPN for challenge: $(CHALLENGE)..."
-	docker exec -it $(CONTAINER_NAME) /workspace/tools/connect_vpn.sh challenges/$(CHALLENGE)/$(CHALLENGE).ovpn
+	docker exec $(CONTAINER_NAME) /workspace/tools/connect_vpn.sh challenges/$(CHALLENGE)/$(CHALLENGE).ovpn
 	@echo "Check container logs for VPN status: docker-compose -f $(COMPOSE_FILE) logs pentest-env"
 
 # Run an Nmap scan
@@ -53,10 +65,18 @@ ifndef IP
 endif
 	@echo "Running Nmap scan on $(IP)..."
 ifdef OUTPUT_DIR
-	docker exec -it $(CONTAINER_NAME) /workspace/tools/nmap_scan.sh -o $(OUTPUT_DIR) $(IP)
+	docker exec $(CONTAINER_NAME) /workspace/tools/nmap_scan.sh -o $(OUTPUT_DIR) $(IP)
 else
-	docker exec -it $(CONTAINER_NAME) /workspace/tools/nmap_scan.sh $(IP)
+	docker exec $(CONTAINER_NAME) /workspace/tools/nmap_scan.sh $(IP)
 endif
 	@echo "Nmap scan initiated. Results will be in the specified output directory or 'scans/'."
 
+# Linting and Formatting
+.PHONY: lint install-hook
+lint:
+	@echo "Running linter to format files..."
+	@./bin/lint.sh
 
+install-hook:
+	@echo "Installing Git pre-commit hook..."
+	@./bin/install-hook.sh

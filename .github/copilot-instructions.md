@@ -4,6 +4,7 @@
 
 *   **Context:** Utilize surrounding code, comments, and project files for relevant suggestions.
 *   **Review:** Always verify suggestions for correctness, conventions, and security.
+*   **Linting:** Before generating or committing code, be aware of the project's linting standards. Run `make lint` to ensure all files are correctly formatted.
 *   **Efficiency:** Prefer direct script execution within Dev Containers; use `make` for host-level Docker management.
 *   **ADRs:** Prioritize updating existing ADRs; create new ones only for significant architectural changes.
 

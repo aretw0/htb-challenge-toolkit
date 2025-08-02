@@ -26,6 +26,32 @@ Siga a convenção [Conventional Commits](https://www.conventionalcommits.org/).
 - **Shell Scripts:** Siga as melhores práticas gerais de scripting em Bash. Mantenha os scripts legíveis e bem comentados quando a lógica for complexa.
 - **Nomenclatura:** Use `snake_case` para nomes de arquivos e diretórios e `kebab-case` para nomes de desafios.
 
+### Formatação e Linting
+
+Para manter a consistência do código e evitar problemas comuns, como espaços em branco indesejados, utilizamos um processo de linting nativo que não requer dependências externas.
+
+#### Execução Manual
+
+A qualquer momento, você pode formatar todos os arquivos do projeto executando o seguinte comando:
+
+```bash
+make lint
+```
+
+Isso irá remover espaços em branco no final das linhas e garantir que todos os arquivos terminem com uma nova linha.
+
+#### Automação com Git Hook (Opcional)
+
+Para automatizar esse processo, você pode instalar um hook de Git que executará o linter antes de cada commit. A instalação é simples e não requer configuração adicional.
+
+Para instalar o hook, execute:
+
+```bash
+make install-hook
+```
+
+O hook garantirá que todos os seus commits estejam sempre formatados corretamente.
+
 ## Padrões de Documentação
 
 Manter a documentação clara e consistente é fundamental para este projeto.

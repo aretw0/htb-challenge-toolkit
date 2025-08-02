@@ -18,6 +18,16 @@
       "windows": {
         "command": ".\\bin\\create_challenge.sh ${input:challengeName}"
       }
+    },
+    {
+      "label": "Lint All Files",
+      "type": "shell",
+      "command": "make lint",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
     }
   ],
   "inputs": [

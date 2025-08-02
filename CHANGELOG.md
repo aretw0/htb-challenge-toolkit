@@ -5,13 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2025-08-01
+## [1.1.0] - 2025-08-02
+
+### Added
+- **Native Linting System:** Implemented a dependency-free linting script (`bin/lint.sh`) to enforce code consistency (trailing whitespace and end-of-file newlines).
+- **Makefile Integration:** Added `make lint` to run the linter manually and `make install-hook` to install an optional Git pre-commit hook for automated formatting.
+- **VS Code Task:** Included a VS Code task to run the linter via `make lint`.
+- **Documentation:** Updated `CONTRIBUTING.md`, `GEMINI.md`, and `.github/copilot-instructions.md` to reflect the new linting process.
+
+## [1.0.0] - 2025-08-02
+
+### Added
+- **Official Release:** Marks the stabilization of the core feature set and development workflows.
+
+## [0.6.0] - 2025-08-01
 
 ### Changed
-- **Refactored Documentation:** Consolidated and streamlined ADRs for clarity and translated all documentation to Portuguese.
-- **Simplified Environment:** Removed automatic VPN initialization, giving developers explicit control over the connection.
-- **Improved Scripts:** Simplified `connect_vpn.sh` and `nmap_scan.sh` by removing implicit logic and favoring explicit parameters.
+- **Decoupled Container Lifecycle:** Modified the Docker container's startup command to `tail -f /dev/null`. This ensures the container starts reliably and remains active, independent of the VPN connection status, guaranteeing a stable development environment.
+- **Explicit VPN Control:** Removed automatic VPN initialization from container startup. The connection is now managed manually by the developer from within the container, providing full control and clear feedback.
 - **Standardized Docker Usage:** Corrected the Docker volume mount to ensure the entire project root is accessible at `/workspace` and standardized `docker-compose` execution from the project root.
+- **Refactored Documentation:** Consolidated and streamlined ADRs for clarity and translated all documentation to Portuguese.
 
 ### Removed
 - **Implicit File Creation:** Removed the automatic creation of placeholder `.ovpn` files from `create_challenge.sh`.

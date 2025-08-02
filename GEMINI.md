@@ -8,6 +8,7 @@ This file contains essential guidelines and context for Gemini regarding this pr
 *   **Self-Documentation:** Maintain the repository self-documented through commits and file structure.
 *   **Environment Neutrality:** Avoid including developer-specific local environment information (usernames, absolute paths, etc.) in versioned files. Exceptions are generic examples in documentation (e.g., `/foo/bar`).
 *   **Tool Prioritization:** Whenever possible, use existing scripts and tools in the repository to perform tasks.
+*   **Linting:** Before committing, run `make lint` to ensure code formatting is consistent.
 *   **ADR Management:** Prioritize updating existing Architectural Decision Records (ADRs) over creating new ones. New ADRs should only be created for significant architectural decisions that introduce a new concept or fundamentally change an existing one. Otherwise, integrate new decisions into relevant existing ADRs.
 
 ## Project Structure
