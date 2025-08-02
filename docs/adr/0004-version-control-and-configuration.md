@@ -13,8 +13,8 @@ Foram tomadas as seguintes decisões de configuração e controle de versão:
     *   O arquivo `.gitignore` foi configurado para ignorar o conteúdo do diretório `challenges/`, exceto por um arquivo `.gitkeep`.
     *   Isso permite que os usuários trabalhem em seus desafios sem versionar acidentalmente arquivos específicos da máquina ou informações sensíveis.
 
-2.  **Abandono do `.env.example`:**
-    *   O arquivo `.env.example` foi removido do projeto, pois as variáveis de ambiente que ele continha não eram mais necessárias devido à mudança para um controle de VPN explícito.
+2.  **Reintrodução de `.env.example`:**
+    *   O arquivo `.env.example` foi reintroduzido para servir como um modelo para variáveis de ambiente, especificamente para o `GITHUB_PERSONAL_ACCESS_TOKEN` que será usado na configuração do servidor MCP. Isso garante que os usuários tenham um guia claro para configurar o ambiente para funcionalidades como o MCP.
 
 ## Consequências
 - **Repositório Limpo:** O projeto permanece um kit de ferramentas genérico, livre de dados específicos do usuário.
