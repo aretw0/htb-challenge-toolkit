@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Makefile Integration:** Added `make lint` to run the linter manually and `make install-hook` to install an optional Git pre-commit hook for automated formatting.
 - **VS Code Task:** Included a VS Code task to run the linter via `make lint`.
 - **Documentation:** Updated `CONTRIBUTING.md`, `GEMINI.md`, and `.github/copilot-instructions.md` to reflect the new linting process.
+- **License:** Added a GPLv3 license to the project.
 
 ## [1.0.0] - 2025-08-02
 
