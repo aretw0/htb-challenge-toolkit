@@ -90,19 +90,7 @@ Nosso objetivo é fornecer um ambiente de desenvolvimento consistente e portáti
 - `JOURNAL.md`: Um sumário das decisões de desenvolvimento e links para os ADRs.
 - `README.md`: Este arquivo.
 
-## Gerenciamento do Servidor MCP (Model Context Protocol)
 
-Este repositório pode incluir um servidor MCP (Model Context Protocol) para cenários específicos. Para utilizá-lo, você precisará configurar um token de acesso pessoal do GitHub no arquivo `.env` na raiz do projeto. Copie o `.env.example` para `.env` e preencha a variável `GITHUB_PERSONAL_ACCESS_TOKEN`.
-
--   **Iniciar o servidor MCP para um serviço específico (ex: GitHub):**
-    ```bash
-    make mcp-up SERVICE=github
-    ```
-
--   **Parar o servidor MCP para um serviço específico (ex: GitHub):**
-    ```bash
-    make mcp-down SERVICE=github
-    ```
 
 ## Contribuição
 
