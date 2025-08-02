@@ -38,6 +38,6 @@ Decisões de arquitetura significativas são documentadas em `docs/adr/`. Se sua
 
 Utilizamos diagramas Mermaid para ilustrar a arquitetura e os fluxos de trabalho. Para garantir a consistência, padronizamos a sintaxe e o estilo dos diagramas.
 
-**--> Para detalhes completos, consulte o ADR: [0015 - Padronização de Diagramas Mermaid](./docs/adr/0015-standardize-mermaid-diagrams.md)**
+**--> Para detalhes completos, consulte o ADR: [0005 - Padronização de Diagramas Mermaid](./docs/adr/0005-diagram-standardization.md)**
 
 As diretrizes estão também refletidas nos arquivos de contexto para assistentes de IA (`GEMINI.md` e `.github/copilot-instructions.md`) para garantir que o código gerado por eles siga os mesmos padrões.
